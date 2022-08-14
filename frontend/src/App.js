@@ -1,10 +1,9 @@
-import { Chessboard } from "react-chessboard";
-
+import PlayRandomMoveEngine from "./Test";
 
 function App() {
   return (
     <div>
-       <Chessboard id="BasicBoard" />
+       <PlayRandomMoveEngine/>
     </div>
   );
 }
