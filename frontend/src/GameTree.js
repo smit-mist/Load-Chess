@@ -6,7 +6,7 @@ function Node(data) {
   this.children = [];
 }
 
-class GameTree {
+export class GameTree {
   constructor() {
     this.root = null;
     this.currentState = [];
@@ -14,24 +14,27 @@ class GameTree {
   }
 
   addNode(data, parentId) {
-    data.nodeId = this.nodeId;
+    const toPass = {move:data};
+    toPass.nodeId = this.nodeId;
     this.nodeId++;
     const parent = parentId ? this.findNode(parentId) : null;
-
+    
     if (parent) {
       for (const childs in parent.children) {
-        if (childs.move === data.move) {
+        if (childs.move === toPass.move) {
           this.currentState.push(childs.move);
           return;
         }
       }
-      const node = new Node(data);
+      const node = new Node(toPass);
       parent.children.push(node);
+      this.currentState.push(node.move);
     } else {
-      const node = new Node(data);
+      const node = new Node(toPass);
       this.root = node;
+      this.currentState.push(node.move);
     }
-    this.currentState.push(node.data);
+    console.log("THIS IS ROOT", this.root);
   }
 
   findNode(data) {
@@ -51,7 +54,7 @@ class GameTree {
   undoCurrentMove() {
     this.currentState.pop();
   }
-  
+
   changeLine(newNodeId) {
     const queue = [this.root];
     const moveArray = [[]];
@@ -70,4 +73,14 @@ class GameTree {
     }
     return [];
   }
+
+  getCurrentGame(){
+    const chess = new Chess();
+    for(const moves in this.currentState){
+        chess.move(moves);
+    }
+    return chess;
+  }
+
+  
 }
