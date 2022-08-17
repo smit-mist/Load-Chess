@@ -10,11 +10,7 @@ const Analysis = () => {
   tree.addNode({move:"e4"}, 1);
   tree.addNode({move:"d4"}, 1);
   tree.addNode({move:"c5"}, 2);
-  tree.addNode({move:"d5"}, 2);
-
-  tree.addNode({move:"c6"}, 3);
-  tree.addNode({move:"d5"}, 3);
-  
+  console.log(tree.root);
   return (
     <div>Analysis</div>
   )

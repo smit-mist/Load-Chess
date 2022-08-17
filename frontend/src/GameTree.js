@@ -2,6 +2,7 @@ import { Chess } from "chess.js";
 
 function Node(data) {
   this.move = data.move;
+  this.name = data.move;
   this.nodeId = data.nodeId;
   this.children = [];
 }
@@ -14,11 +15,11 @@ export class GameTree {
   }
 
   addNode(data, parentId) {
-    const toPass = {move:data};
+    const toPass = { move: data.move };
     toPass.nodeId = this.nodeId;
     this.nodeId++;
     const parent = parentId ? this.findNode(parentId) : null;
-    
+
     if (parent) {
       for (const childs in parent.children) {
         if (childs.move === toPass.move) {
@@ -34,7 +35,6 @@ export class GameTree {
       this.root = node;
       this.currentState.push(node.move);
     }
-    console.log("THIS IS ROOT", this.root);
   }
 
   findNode(data) {
@@ -44,8 +44,9 @@ export class GameTree {
       if (currNode.nodeId === data) {
         return currNode;
       }
-      for (const childs in currNode.children) {
-        queue.push(childs);
+
+      for (let i = 0; i < currNode.children.length; i++) {
+        queue.push(currNode.children[i]);
       }
     }
     return null;
@@ -74,13 +75,11 @@ export class GameTree {
     return [];
   }
 
-  getCurrentGame(){
+  getCurrentGame() {
     const chess = new Chess();
-    for(const moves in this.currentState){
-        chess.move(moves);
+    for (const moves in this.currentState) {
+      chess.move(moves);
     }
     return chess;
   }
-
-  
 }
