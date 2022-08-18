@@ -16,11 +16,9 @@ export class GameTree {
   }
 
   addNode(data, parentId) {
-    console.log("Inside add node function", this.currentState, this.idState);
     const toPass = data;
     toPass.nodeId = this.nodeId;
     this.nodeId++;
-    console.log(toPass);
     const parent = parentId ? this.findNode(parentId) : null;
 
     if (parent) {
@@ -36,7 +34,6 @@ export class GameTree {
       this.currentState.push(node.move);
       this.idState.push(node.nodeId);
     } else {
-      console.log("Changing the root node");
       const node = new Node(toPass);
       this.root = node;
       this.currentState = [node.move];
@@ -44,7 +41,6 @@ export class GameTree {
     }
   }
   makeMove(data) {
-    console.log("MAKE MOVE", data);
     const lastNode = this.idState[this.idState.length - 1];
     this.addNode(data, lastNode);
   }
@@ -113,5 +109,16 @@ export class GameTree {
       chess.move(moves);
     }
     return chess;
+  }
+
+  getJSON(startFrom){
+    const obj = {};
+    obj.name = startFrom.name;
+    obj.children = [];
+    for(let j=0;j<startFrom.children.length;j++){
+      const child = startFrom.children[j];
+      obj.children.push(this.getJSON(child));
+    }
+    return obj;
   }
 }

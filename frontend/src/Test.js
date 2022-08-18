@@ -14,13 +14,9 @@ export default function PlayRandomMoveEngine() {
     return result; 
     // null if the move was illegal, the move object if the move was legal
   }
-  useEffect(() => {
-    console.log(game.history());
-    console.log(game.fen());
-  }, [game]);
+
 
   function undoPreviousMove() {
-    console.log(game.history());
     var temp = { ...game };
     temp.undo();
     setGame(temp);
@@ -29,10 +25,6 @@ export default function PlayRandomMoveEngine() {
       if(!game.get(s)){
           return;
       }
-      console.log("Inside");
-      
-      console.log(game.moves({square:s}));
-      
   }
   function onDrop(sourceSquare, targetSquare) {
     const move = makeAMove({
@@ -47,8 +39,6 @@ export default function PlayRandomMoveEngine() {
     // setTimeout(makeRandomMove, 200);
     return true;
   }
-  console.log("Before returning", game.history());
-  console.log(game.pgn());
 
   return (
     <>
