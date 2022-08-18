@@ -11,16 +11,9 @@ export default function PlayRandomMoveEngine() {
     const gameCopy = { ...game };
     const result = gameCopy.move(move);
     setGame(gameCopy);
-    return result; // null if the move was illegal, the move object if the move was legal
+    return result; 
+    // null if the move was illegal, the move object if the move was legal
   }
-
-  //   function makeRandomMove() {
-  //     const possibleMoves = game.moves();
-  //     if (game.game_over() || game.in_draw() || possibleMoves.length === 0)
-  //       return; // exit if the game is over
-  //     const randomIndex = Math.floor(Math.random() * possibleMoves.length);
-  //     makeAMove(possibleMoves[randomIndex]);
-  //   }
   useEffect(() => {
     console.log(game.history());
     console.log(game.fen());

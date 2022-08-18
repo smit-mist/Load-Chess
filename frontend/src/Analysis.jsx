@@ -5,16 +5,13 @@ import { GameTree } from "./GameTree";
 import Tree from "react-d3-tree";
 
 const orgChart = {
-  name: "CEO",
+  name: "",
   children: [
     {
-      name: "Manager",
-      attributes: {
-        department: "Production",
-      },
+      name: "e4",
       children: [
         {
-          name: "Foreman",
+          name: "e5",
           attributes: {
             department: "Fabrication",
           },
@@ -42,15 +39,68 @@ const orgChart = {
 
 const Analysis = () => {
   const [game, setGame] = useState(new Chess());
-  const tree = new GameTree();
-  tree.addNode({ move: "" });
-  
+  const [tree, setTree] = useState(new GameTree());
+  if(!tree.root){
+    tree.addNode({move:"", name:""});
+    setTree(tree);
+  }
+  function makeAMove(move) {
+    const gameCopy = { ...game };
+    const result = gameCopy.move(move);
+    console.log(move);
+    setTree(tree);
+    setGame(gameCopy);
+    console.log("GAME PGN", game.history());
+    tree.makeMove({move, name:game.history()[game.history().length-1]});
+    return result; 
+    // null if the move was illegal, the move object if the move was legal
+  }
+  // useEffect(() => {
+  //   console.log(game.history());
+  //   console.log(game.fen());
+  // }, [game]);
+
+  function undoPreviousMove() {
+    var temp = { ...game };
+    temp.undo();
+    tree.undoCurrentMove();
+    setTree(tree);
+    setGame(temp);
+  }
+  function moveSelected(s){
+      if(!game.get(s)){
+          return;
+      }
+  }
+  function onDrop(sourceSquare, targetSquare) {
+    const move = makeAMove({
+      from: sourceSquare,
+      to: targetSquare,
+      promotion: "q", // always promote to a queen for example simplicity
+    });
+
+    if (move === null) return false;
+    return true;
+  }
+  console.log("Printing game tree");
   console.log(tree.root);
+  console.log(tree.currentState);
+  console.log(tree.idState);
   return (
-    <div id="treeWrapper" style={{ width: "500em", height: "500em" }}>
-      {" "}
-      <Tree data={tree.root} />
-    </div>
+    <>
+      <Chessboard
+        position={game.fen()}
+        onPieceDrop={onDrop}
+        animationDuration={500}
+        onSquareClick={(s) => {
+          moveSelected(s);
+        }}
+      />
+      <div id="treeWrapper" style={{ width: "500", height: "500" }}>
+        {" "}
+        <Tree data={tree.root} />
+      </div>
+    </>
   );
 };
 

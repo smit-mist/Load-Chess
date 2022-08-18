@@ -2,7 +2,7 @@ import { Chess } from "chess.js";
 
 function Node(data) {
   this.move = data.move;
-  this.name = data.move;
+  this.name = data.name;
   this.nodeId = data.nodeId;
   this.children = [];
 }
@@ -10,32 +10,45 @@ function Node(data) {
 export class GameTree {
   constructor() {
     this.root = null;
-    this.currentState = [];
+    this.moveState = [];
+    this.idState = [];
     this.nodeId = 1;
   }
 
   addNode(data, parentId) {
-    const toPass = { move: data.move };
+    console.log("Inside add node function", this.currentState, this.idState);
+    const toPass = data;
     toPass.nodeId = this.nodeId;
     this.nodeId++;
+    console.log(toPass);
     const parent = parentId ? this.findNode(parentId) : null;
 
     if (parent) {
       for (const childs in parent.children) {
         if (childs.move === toPass.move) {
           this.currentState.push(childs.move);
+          this.idState.push(childs.nodeId);
           return;
         }
       }
       const node = new Node(toPass);
       parent.children.push(node);
       this.currentState.push(node.move);
+      this.idState.push(node.nodeId);
     } else {
+      console.log("Changing the root node");
       const node = new Node(toPass);
       this.root = node;
-      this.currentState.push(node.move);
+      this.currentState = [node.move];
+      this.idState = [node.nodeId];
     }
   }
+  makeMove(data) {
+    console.log("MAKE MOVE", data);
+    const lastNode = this.idState[this.idState.length - 1];
+    this.addNode(data, lastNode);
+  }
+  
 
   findNode(data) {
     const queue = [this.root];
@@ -54,25 +67,44 @@ export class GameTree {
 
   undoCurrentMove() {
     this.currentState.pop();
+    this.idState.pop();
   }
 
   changeLine(newNodeId) {
     const queue = [this.root];
     const moveArray = [[]];
+    let finalSeq = [];
     while (queue.length > 0) {
       const currNode = queue.shift();
       const currState = moveArray.shift();
       if (currNode.nodeId === newNodeId) {
-        return currState;
+        finalSeq = currState;
+        break;
       }
-      for (const childs in currNode.children) {
+      for (let j = 0; j < currNode.children.length; j++) {
+        const childs = currNode.children[j];
         const temp = currState;
         temp.push(childs.move);
         queue.push(childs);
         moveArray.push(temp);
       }
     }
-    return [];
+    let temp = this.root;
+    this.currentState = [];
+    this.idState = [];
+    let ind = 0;
+    while (temp.nodeId !== newNodeId) {
+      this.currentState.push(temp.move);
+      this.currentState.push(temp.nodeId);
+      for (let j = 0; j < temp.children.length; j++) {
+        const child = temp.children[j];
+        if (child.move === finalSeq[ind]) {
+          ind++;
+          temp = child;
+          break;
+        }
+      }
+    }
   }
 
   getCurrentGame() {
