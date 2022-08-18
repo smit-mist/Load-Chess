@@ -8,7 +8,7 @@ function App() {
   return (
     <div>
       <Router>
-      <ResponsiveAppBar />
+      <ResponsiveAppBar pages={["Home", "Analysis", "TV"]}/>
 
         <Routes>
           <Route path="/" element={<h1>This is home</h1>} />
