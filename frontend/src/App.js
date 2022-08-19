@@ -4,6 +4,7 @@ import ResponsiveAppBar from "./components/ResponsiveAppBar";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import ChessTV from "./pages/ChessTV";
 
+
 function App() {
   return (
     <div>
@@ -11,6 +12,7 @@ function App() {
         <ResponsiveAppBar
           pages={["Home", "Analysis", "TV", "News"]}
           link={["/", "/analysis", "/tv", "/news"]}
+          color="primary"
         />
 
         <Routes>
