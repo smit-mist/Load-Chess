@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Chess } from "chess.js";
 import { Chessboard } from "react-chessboard";
-import { GameTree } from "../GameTree";
+import { GameTree } from "../helper/GameTree";
 import Tree from "react-d3-tree";
 import Button from "@mui/material/Button";
 
