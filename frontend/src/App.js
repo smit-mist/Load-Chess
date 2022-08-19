@@ -9,8 +9,8 @@ function App() {
     <div>
       <Router>
         <ResponsiveAppBar
-          pages={["Home", "Analysis", "TV", "News", "Brodcast"]}
-          link={["/", "/analysis", "/tv","/news", "/brodcast"]}
+          pages={["Home", "Analysis", "TV", "News", "Broadcast"]}
+          link={["/", "/analysis", "/tv","/news", "/broadcast"]}
           color="primary"
         />
 
