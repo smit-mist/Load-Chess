@@ -8,12 +8,15 @@ function App() {
   return (
     <div>
       <Router>
-      <ResponsiveAppBar pages={["Home", "Analysis", "TV"]}/>
+        <ResponsiveAppBar
+          pages={["Home", "Analysis", "TV", "News"]}
+          link={["/", "/analysis", "/tv", "/news"]}
+        />
 
         <Routes>
           <Route path="/" element={<h1>This is home</h1>} />
           <Route path="/analysis" element={<Analysis />} />
-          <Route path="/tv" element={<ChessTV/>} />
+          <Route path="/tv" element={<ChessTV />} />
           <Route path="/news" element={<h1>This is News</h1>} />
         </Routes>
       </Router>

@@ -40,6 +40,7 @@ const ResponsiveAppBar = (props) => {
     }
 
     navigate(path);
+    setAnchorElUser(null);
   };
 
   return (
