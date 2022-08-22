@@ -1,34 +1,41 @@
 import React from "react";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import ndjsonStream from "can-ndjson-stream";
+
 const BroadCast = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [items, setItems] = useState([]);
 
-  useEffect(() => {
-    axios("https://lichess.org/api/broadcast")
-      // .then((res) => {
-      //   console.log(res.data);
-      // })
-      .then(
-        (result) => {
-          setLoading(false);
-          console.log("API RESULT:- ", result);
-          setItems(JSON.parse(result));
-          console.log("Items:- ", items);
-        },
-        // Note: it's important to handle errors here
-        // instead of a catch() block so that we don't swallow
-        // exceptions from actual bugs in components.
-        (error) => {
-          console.log("ERROR:- ", error);
-          setLoading(false);
-          setError(error);
+  console.log("FEtching");
+  fetch("https://lichess.org/api/broadcast", {
+    method: "get",
+  })
+    .then((data) => {
+      return ndjsonStream(data.body);
+    })
+    .then((todoStream) => {
+      const allTours = [];
+      const streamReader = todoStream.getReader();
+      const read = (result) => {
+        if (result.done) {
+          console.log(allTours);
+          return ;
         }
-      );
-  }, []);
 
+        console.log(result, typeof result);
+        allTours.push(result);
+        streamReader.read().then(read);
+      };
+
+      streamReader.read().then(read);
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+
+  console.log("PRINTING ITEMS", items);
   return <div>BrodCast</div>;
 };
 
