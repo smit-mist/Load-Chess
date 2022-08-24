@@ -2,13 +2,14 @@ import React from "react";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import ndjsonStream from "can-ndjson-stream";
+import Grid from "@mui/material/Unstable_Grid2";
+import Box from "@mui/material/Box";
+import TournamentCard from "../components/TournamentCard";
 
 const BroadCast = () => {
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
   const [items, setItems] = useState([]);
 
-  console.log("FEtching");
   fetch("https://lichess.org/api/broadcast", {
     method: "get",
   })
@@ -20,11 +21,11 @@ const BroadCast = () => {
       const streamReader = todoStream.getReader();
       const read = (result) => {
         if (result.done) {
-          console.log(allTours);
-          return ;
+          setItems(allTours);
+          setLoading(false);
+          console.log("All tours", allTours);
+          return;
         }
-
-        console.log(result, typeof result);
         allTours.push(result);
         streamReader.read().then(read);
       };
@@ -35,8 +36,19 @@ const BroadCast = () => {
       console.error(err);
     });
 
-  console.log("PRINTING ITEMS", items);
-  return <div>BrodCast</div>;
+  if (loading) return <div>Loadingt</div>;
+
+  return (
+    <Box sx={{ width: "100%" }}>
+      <Grid container rowSpacing={3} columnSpacing={3} my={5}>
+        {items.forEach((tour) => {
+          <Grid xs={4}>
+            <TournamentCard />
+          </Grid>;
+        })}
+      </Grid>
+    </Box>
+  );
 };
 
 export default BroadCast;
