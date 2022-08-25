@@ -17,16 +17,13 @@ const BroadCast = () => {
       console.log("ignored repeated call");
     }
     isCalled = true;
-    console.log("Get all tour is called");
     fetch("https://lichess.org/api/broadcast", {
       method: "get",
     })
       .then((data) => {
-        console.log("Got the json");
         return ndjsonStream(data.body);
       })
       .then((todoStream) => {
-        console.log("Stream is fetched");
         const allTours = [];
         const streamReader = todoStream.getReader();
         const read = (result) => {
@@ -52,11 +49,11 @@ const BroadCast = () => {
     getAllTours();
   }, []);
 
-  if (loading) return <div>Loadingt</div>;
+  if (loading) return <div>Loading</div>;
   console.log(items);
   return (
     <Box sx={{ width: "100%" }}>
-      <Grid container rowSpacing={3} columnSpacing={3} my={5}>
+      <Grid container rowSpacing={3} columnSpacing={3} my={5} mx={10}>
         {items.map((curr) => {
           return (
             <Grid xs={4}>
