@@ -5,7 +5,10 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { Button, CardActionArea, CardActions } from "@mui/material";
 
-export default function TournamentCard() {
+export default function TournamentCard(props) {
+  const { tour } = props;
+  let tourName = tour.tour.name;
+  let desc = tour.tour.description;
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardActionArea>
@@ -16,12 +19,11 @@ export default function TournamentCard() {
           alt="Tournament Image"
         />
         <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
-            Lizard
+          <Typography gutterBottom variant="h6" component="div">
+            {tourName}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            Lizards are a widespread group of squamate reptiles, with over 6,000
-            species, ranging across all continents except Antarctica
+            {desc}
           </Typography>
         </CardContent>
       </CardActionArea>
