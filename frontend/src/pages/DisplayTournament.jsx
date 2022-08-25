@@ -2,6 +2,7 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { breakPipe } from "../helper/StringOps";
 
 let isCalled = false;
 const DisplayTournament = () => {
@@ -30,6 +31,7 @@ const DisplayTournament = () => {
   if (loading) {
     return <div>Loading</div>;
   }
+  console.log("Printing the name", breakPipe(currentTour.tour.name));
   return <div>{currentTour.tour.name}</div>;
 };
 
