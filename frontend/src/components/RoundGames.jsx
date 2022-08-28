@@ -4,15 +4,15 @@ import axios from "axios";
 import Loader from "./Loader";
 import ViewFEN from "./ViewFEN";
 
-
 let isCalled = false;
 const RoundGames = (props) => {
   const roundId = props.id;
-
+  console.log("New round is created", roundId);
   const [loading, setLoading] = useState(true);
   const [currentRound, setCurrentRound] = useState({});
   const getCurrentRound = async () => {
     if (isCalled) {
+        console.log("Repeated");
       return;
     }
     isCalled = true;
@@ -25,12 +25,14 @@ const RoundGames = (props) => {
   useEffect(() => {
     getCurrentRound();
   }, []);
-  if(loading){
-    return <Loader/>
+  if (loading) {
+    return <Loader />;
   }
-  return <div>
-    <ViewFEN pgn={currentRound}/>
-  </div>;
+  return (
+    <div>
+      <ViewFEN pgn={currentRound} />
+    </div>
+  );
 };
 
 export default RoundGames;
