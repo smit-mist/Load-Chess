@@ -17,6 +17,7 @@ export default function TournamentCard(props) {
     <Link
       href={`/tournament/${tour.tour.slug}/${tour.tour.id}`}
       underline="none"
+      key={tour.tour.id}
     >
       <Card sx={{ height: 350 }}>
         <CardActionArea>
