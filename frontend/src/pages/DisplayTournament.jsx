@@ -4,8 +4,13 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { breakPipe } from "../helper/StringOps";
 import { Chip, Grid, Typography } from "@mui/material";
+import RoundGames from "../components/RoundGames";
 
 let isCalled = false;
+
+
+
+
 const DisplayTournament = () => {
   let id = useParams().id;
   let slug = useParams().slug;
@@ -17,7 +22,7 @@ const DisplayTournament = () => {
       return;
     }
     isCalled = true;
-    console.log("Getting current tournament");
+ //   console.log("Getting current tournament");
     const apiUrl = `https://lichess.org/broadcast/${slug}/${id}`;
     const response = await axios.get(apiUrl);
 
@@ -57,6 +62,8 @@ const DisplayTournament = () => {
           }
         })}
       </Grid>
+
+        <RoundGames id={currentTour.rounds[round].id}/>
     </Fragment>
   );
 };
