@@ -1,8 +1,9 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { breakPipe } from "../helper/StringOps";
+import { Chip, Grid, Typography } from "@mui/material";
 
 let isCalled = false;
 const DisplayTournament = () => {
@@ -10,7 +11,7 @@ const DisplayTournament = () => {
   let slug = useParams().slug;
   const [loading, setLoading] = useState(true);
   const [currentTour, setCurrentTour] = useState({});
-
+  const [round, setRound] = useState(0);
   const getCurrentTournament = async () => {
     if (isCalled) {
       return;
@@ -31,8 +32,33 @@ const DisplayTournament = () => {
   if (loading) {
     return <div>Loading</div>;
   }
-  console.log("Printing the name", breakPipe(currentTour.tour.name));
-  return <div>{currentTour.tour.name}</div>;
+  // console.log("Printing", currentTour.rounds, typeof currentTour.rounds);
+  return (
+    <Fragment>
+      <Typography variant="h4" gutterBottom>
+        {currentTour.tour.name}
+      </Typography>
+      <Grid container rowSpacing={1} columnSpacing={2}>
+        {currentTour.rounds.map((obj, key) => {
+          if (round === key) {
+            return (
+              <Grid item>
+                <Chip label={obj.name} color="info" />
+              </Grid>
+            );
+          } else {
+            return (
+              <Grid item>
+                <Chip label={obj.name} variant="outlined" onClick={() => {
+                  setRound(key);
+                }} />
+              </Grid>
+            );
+          }
+        })}
+      </Grid>
+    </Fragment>
+  );
 };
 
 export default DisplayTournament;
