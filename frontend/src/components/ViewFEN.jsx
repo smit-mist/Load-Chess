@@ -5,41 +5,13 @@ import { useEffect, useState } from "react";
 import Loader from "./Loader";
 
 const ViewFEN = (props) => {
-  const { pgn } = props;
+  const { allGames } = props;
   const [game, setGame] = useState(new Chess());
   const [loading, setLoading] = useState(true);
   const loadGame = () => {
-    let smit = "";
-    let ignore = false;
-    for (let i = 0; i < pgn.length; i++) {
-      if (ignore) {
-        if (pgn[i] == "}") {
-          ignore = false;
-        } else {
-          continue;
-        }
-      } else if (pgn[i] === "{") {
-        ignore = true;
-      } else if (pgn[i + 1] === "." && pgn[i + 2] === ".") {
-        i += 4;
-        continue;
-      } else if (
-        i !== 0 &&
-        pgn[i] === "[" &&
-        pgn[i + 1] === "E" &&
-        pgn[i + 2] == "v"
-      ) {
-        break;
-      } else {
-        smit += pgn[i];
-      }
-    }
+    console.log(allGames);
+    let smit = allGames[0];
     console.log("Loading game", smit);
-    const temp = new Chess();
-    temp.load_pgn(smit);
-    setGame(temp);
-    game.load_pgn(smit);
-    setLoading(false);
   };
   useEffect(() => {
     loadGame();
