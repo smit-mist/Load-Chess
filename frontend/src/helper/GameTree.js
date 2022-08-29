@@ -20,12 +20,16 @@ export class GameTree {
     toPass.nodeId = this.nodeId;
     this.nodeId++;
     const parent = parentId ? this.findNode(parentId) : null;
-
     if (parent) {
       for (const childs in parent.children) {
-        if (childs.move === toPass.move) {
-          this.currentState.push(childs.move);
-          this.idState.push(childs.nodeId);
+        let smit = parent.children[childs];
+
+        if (
+          smit.move.to === toPass.move.to &&
+          smit.move.from === toPass.move.from
+        ) {
+          this.currentState.push(smit.move);
+          this.idState.push(smit.nodeId);
           return;
         }
       }
@@ -44,7 +48,6 @@ export class GameTree {
     const lastNode = this.idState[this.idState.length - 1];
     this.addNode(data, lastNode);
   }
-  
 
   findNode(data) {
     const queue = [this.root];
@@ -111,11 +114,11 @@ export class GameTree {
     return chess;
   }
 
-  getJSON(startFrom){
+  getJSON(startFrom) {
     const obj = {};
     obj.name = startFrom.name;
     obj.children = [];
-    for(let j=0;j<startFrom.children.length;j++){
+    for (let j = 0; j < startFrom.children.length; j++) {
       const child = startFrom.children[j];
       obj.children.push(this.getJSON(child));
     }

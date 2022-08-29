@@ -5,8 +5,6 @@ import { GameTree } from "../helper/GameTree";
 import Tree from "react-d3-tree";
 import Button from "@mui/material/Button";
 
-
-
 const Analysis = () => {
   const [game, setGame] = useState(new Chess());
   const [tree, setTree] = useState(new GameTree());
@@ -17,13 +15,13 @@ const Analysis = () => {
   function makeAMove(move) {
     const gameCopy = { ...game };
     const result = gameCopy.move(move);
+    if (!result) return result;
     setTree(tree);
     setGame(gameCopy);
     tree.makeMove({ move, name: game.history()[game.history().length - 1] });
     return result;
     // null if the move was illegal, the move object if the move was legal
   }
- 
 
   function undoPreviousMove() {
     var temp = { ...game };
@@ -61,7 +59,11 @@ const Analysis = () => {
       {game.pgn()}
 
       <Button onClick={undoPreviousMove}>Text</Button>
-      <div id="treeWrapper" style={{ width: "500", height: "500" }}>
+      <div
+        id="treeWrapper"
+        style={{ width: "50em", height: "20em" }}
+        align="center"
+      >
         {" "}
         <Tree data={tree.getJSON(tree.root)} />
       </div>
