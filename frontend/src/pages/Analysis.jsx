@@ -4,10 +4,31 @@ import { Chessboard } from "react-chessboard";
 import { GameTree } from "../helper/GameTree";
 import Tree from "react-d3-tree";
 import Button from "@mui/material/Button";
+import axios from "axios";
 
 const Analysis = () => {
   const [game, setGame] = useState(new Chess());
   const [tree, setTree] = useState(new GameTree());
+
+  const engineEval = async () => {
+    let currentFen = game.fen();
+    let withoutSpace = "";
+    for(let i=0;i<currentFen.length;i++){
+      if(currentFen[i] === ' '){
+        withoutSpace += "+";
+      }
+      else{
+        withoutSpace += currentFen[i];
+      }
+    }
+    console.log(withoutSpace);
+    const { data } = await axios.get(`https://lichess.org/api/cloud-eval?fen=${withoutSpace}`);
+    console.log("engine", data);
+  };
+  useEffect(() => {
+    engineEval();
+  }, [game]);
+
   if (!tree.root) {
     tree.addNode({ move: "", name: "" });
     setTree(tree);
