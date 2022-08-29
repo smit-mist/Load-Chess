@@ -14,7 +14,6 @@ const BroadCast = () => {
 
   const getAllTours = () => {
     if (isCalled) {
-      // console.log("ignored repeated call");
     }
     isCalled = true;
     fetch("https://lichess.org/api/broadcast", {
@@ -30,8 +29,6 @@ const BroadCast = () => {
           if (result.done) {
             setItems(allTours);
             setLoading(false);
-            //    console.log("All tours", allTours);
-            //     console.log("Get tour is completed");
 
             return;
           }
@@ -50,7 +47,6 @@ const BroadCast = () => {
   }, []);
 
   if (loading) return <div>Loading</div>;
-  // console.log(items);
   return (
     <Box sx={{ width: "100%" }}>
       <Grid container rowSpacing={3} columnSpacing={3} my={5} mx={10}>

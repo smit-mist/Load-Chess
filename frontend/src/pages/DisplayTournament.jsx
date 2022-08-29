@@ -19,11 +19,9 @@ const DisplayTournament = () => {
   const [round, setRound] = useState(0);
   const getCurrentTournament = async () => {
     if (isCalled) {
-      console.log("Repeated");
       return;
     }
     isCalled = true;
- //   console.log("Getting current tournament");
     const apiUrl = `https://lichess.org/broadcast/${slug}/${id}`;
     const response = await axios.get(apiUrl);
   
@@ -38,7 +36,6 @@ const DisplayTournament = () => {
   if (loading) {
     return <div>Loading</div>;
   }
-  // console.log("Printing", currentTour.rounds, typeof currentTour.rounds);
   return (
     <Fragment>
       <Typography variant="h4" gutterBottom>
