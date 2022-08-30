@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import ndjsonStream from "can-ndjson-stream";
 import Grid from "@mui/material/Unstable_Grid2";
 import Box from "@mui/material/Box";
-import TournamentCard from "../components/TournamentCard";
+import TournamentCard from "../../components/ui/TournamentCard";
 
 let isCalled = false;
 

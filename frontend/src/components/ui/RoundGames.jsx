@@ -1,8 +1,8 @@
 import React, { Fragment } from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import Loader from "./Loader";
-import ViewFEN from "./ViewFEN";
+import Loader from "../common/Loader";
+import ViewFEN from "../chessboard/ViewFEN";
 import { Grid } from "@mui/material";
 
 let isCalled = "";

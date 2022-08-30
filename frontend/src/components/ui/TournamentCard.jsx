@@ -5,7 +5,7 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { Button, CardActionArea, CardActions } from "@mui/material";
 import { Link } from "@mui/material";
-import { breakPipe } from "../helper/StringOps";
+import { breakPipe } from "../../helper/StringOps";
 import { Divider, Chip } from "@mui/material";
 
 export default function TournamentCard(props) {

@@ -1,9 +1,9 @@
 import Analysis from "./pages/Analysis";
-import ResponsiveAppBar from "./components/ResponsiveAppBar";
+import ResponsiveAppBar from "./components/common/ResponsiveAppBar";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import ChessTV from "./pages/ChessTV";
-import BroadCast from "./pages/BroadCast";
-import DisplayTournament from "./pages/DisplayTournament";
+import BroadCast from "./pages/broadcast/BroadCast";
+import DisplayTournament from "./pages/broadcast/DisplayTournament";
 
 function App() {
   return (

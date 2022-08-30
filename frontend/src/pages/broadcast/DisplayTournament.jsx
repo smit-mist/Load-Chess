@@ -2,9 +2,9 @@ import React, { Fragment } from "react";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { breakPipe } from "../helper/StringOps";
+import { breakPipe } from "../../helper/StringOps";
 import { Chip, Grid, Typography } from "@mui/material";
-import RoundGames from "../components/RoundGames";
+import RoundGames from "../../components/ui/RoundGames";
 
 let isCalled = false;
 

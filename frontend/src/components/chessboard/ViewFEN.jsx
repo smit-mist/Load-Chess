@@ -2,8 +2,8 @@ import React from "react";
 import { Chessboard } from "react-chessboard";
 import { Chess } from "chess.js";
 import { useEffect, useState } from "react";
-import Loader from "./Loader";
-import { loadPGN } from "../helper/ChessEditor";
+import Loader from "../common/Loader";
+import { loadPGN } from "../../helper/ChessEditor";
 
 const ViewFEN = (props) => {
   const { currGame } = props;
