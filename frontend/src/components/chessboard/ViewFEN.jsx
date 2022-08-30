@@ -4,6 +4,8 @@ import { Chess } from "chess.js";
 import { useEffect, useState } from "react";
 import Loader from "../common/Loader";
 import { loadPGN } from "../../helper/ChessEditor";
+import { Skeleton } from "@mui/material";
+
 
 const ViewFEN = (props) => {
   const { currGame } = props;
@@ -21,7 +23,7 @@ const ViewFEN = (props) => {
     loadGame();
   }, []);
   if (loading) {
-    return <Loader />;
+    return <Skeleton variant="rectangular" width={200} height={200} />;
   }
 
   return (

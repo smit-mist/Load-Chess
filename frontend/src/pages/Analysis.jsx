@@ -83,8 +83,9 @@ const Analysis = () => {
       <Button onClick={undoPreviousMove}>Text</Button>
       <div
         id="treeWrapper"
-        style={{ width: "50em", height: "20em" }}
-        align="center"
+        
+        // style={{ width: "50em", height: "20em" }}
+        align="right"
       >
         {" "}
         <Tree data={tree.getJSON(tree.root)} />
