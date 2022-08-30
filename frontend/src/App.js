@@ -4,6 +4,8 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import ChessTV from "./pages/ChessTV";
 import BroadCast from "./pages/broadcast/BroadCast";
 import DisplayTournament from "./pages/broadcast/DisplayTournament";
+import Test from "./helper/Test";
+
 
 function App() {
   return (
@@ -22,6 +24,8 @@ function App() {
           <Route path="/news" element={<h1>This is News</h1>} />
           <Route path="/broadcast" element={<BroadCast />} />
           <Route path="/tournament/:slug/:id" element={<DisplayTournament />} />
+          <Route path="/test" element={<Test />} />
+          <Route path="*" element={<h1>No such route</h1>}/>
         </Routes>
       </Router>
     </div>
