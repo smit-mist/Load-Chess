@@ -7,6 +7,7 @@ import ButtonGroup from "@mui/material/ButtonGroup";
 import Button from "@mui/material/Button";
 import { Fragment } from "react";
 import { Grid, Paper, Card, Typography } from "@mui/material";
+import Tree from "react-d3-tree";
 
 const GamePlay = () => {
   const [game, setGame] = useState(new Chess());
@@ -82,6 +83,11 @@ const GamePlay = () => {
           </Paper>
         </Grid>
       </Grid>
+      <Paper elevation={5} sx={{minHeight:500}}>
+      <div id="treeWrapper" style={{  height: 500 }}>
+        <Tree data={tree.getJSON(tree.root)} enableLegacyTransitions={true} translate= {{ x: 30, y: 270 }}/>
+        </div>
+      </Paper>
     </Fragment>
   );
 };
