@@ -36,6 +36,12 @@ const GamePlay = () => {
     setTree(tree);
     setGame(temp);
   }
+
+  function nextMove() {
+    tree.makeMove();
+    setTree(tree);
+    setGame(tree.getCurrentGame());
+  }
   function onDrop(sourceSquare, targetSquare) {
     const move = makeAMove({
       from: sourceSquare,
@@ -61,7 +67,7 @@ const GamePlay = () => {
           <Paper elevation={3}>
             <Card sx={{ minHeight: 520 }}>
               <Grid container justify="center" rowSpacing={1}>
-                {game.history().map((e, i) => {
+                {tree.getMainLineHistory().map((e, i) => {
                   if (i % 2 === 0) {
                     let toPrint = i / 2 + 1;
                     return (
@@ -78,8 +84,8 @@ const GamePlay = () => {
                 })}
               </Grid>
             </Card>
-            <Divider/>
-            <br/>
+            <Divider />
+            <br />
             <Card sx={{ minHeight: 50 }}>
               <Grid container justifyContent="space-evenly">
                 <Grid item xs={2}>
@@ -89,7 +95,7 @@ const GamePlay = () => {
                 </Grid>
 
                 <Grid item xs={2}>
-                  <Button variant="outlined">
+                  <Button variant="outlined" onClick={nextMove}>
                     <ArrowForwardIosIcon />
                   </Button>
                 </Grid>
