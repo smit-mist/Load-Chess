@@ -6,12 +6,12 @@ import { GameTree } from "../../helper/GameTree";
 import ButtonGroup from "@mui/material/ButtonGroup";
 import Button from "@mui/material/Button";
 import { Fragment } from "react";
-import { Grid, Paper, Card } from "@mui/material";
+import { Grid, Paper, Card, Typography } from "@mui/material";
 
 const GamePlay = () => {
   const [game, setGame] = useState(new Chess());
   const [tree, setTree] = useState(new GameTree());
- 
+
   if (!tree.root) {
     tree.addNode({ move: "", name: "" });
     setTree(tree);
@@ -46,18 +46,34 @@ const GamePlay = () => {
   return (
     <Fragment>
       <br></br>
-      <Grid container justifyContent="space-around">
+      <Grid container justifyContent="center">
         <Grid item xs={5}>
           <Chessboard
             position={game.fen()}
             onPieceDrop={onDrop}
-            animationDuration={500}
+            animationDuration={300}
           />
         </Grid>
-        <Grid item xs={5}>
+        <Grid item xs={4}>
           <Paper elevation={3}>
-            <Card sx={{minHeight:500}}>
-              {game.pgn()}
+            <Card sx={{ minHeight: 520 }}>
+              <Grid container justify="center" rowSpacing={1}>
+                {game.history().map((e, i) => {
+                  if (i % 2 === 0) {
+                    let toPrint = i / 2 + 1;
+                    return (
+                      <Grid item xs={6}>
+                        <Typography variant="h5">{`${toPrint}.  ${e}`}</Typography>
+                      </Grid>
+                    );
+                  }
+                  return (
+                    <Grid item xs={6}>
+                      <Typography variant="h5">{e}</Typography>
+                    </Grid>
+                  );
+                })}
+              </Grid>
             </Card>
             <ButtonGroup variant="contained">
               <Button onClick={undoPreviousMove}>{"<"}</Button>
