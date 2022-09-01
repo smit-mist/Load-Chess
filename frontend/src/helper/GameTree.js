@@ -161,6 +161,7 @@ export class GameTree {
 
   // ! Gives JSON of whole tree, used in displaying.
   getJSON(startFrom) {
+    // ?Tree is not updating after last commit.
     const obj = {};
     obj.name = startFrom.name;
     obj.children = [];
