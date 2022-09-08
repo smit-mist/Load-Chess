@@ -33,7 +33,9 @@ export class GameTree {
     return null;
   }
   areSameMove(a, b) {
+    console.log(a, b);
     if (a.move?.to === b.move?.to && a.move?.from === b.move?.from) return true;
+    console.log("Both are different");
     return false;
   }
   // ! Function to add a children to given parentId. If parentId not found will make the current node root.
@@ -58,12 +60,7 @@ export class GameTree {
         }
       }
       const node = new Node(toPass);
-      if (
-        this.areSameMove(
-          this.mainLine[this.mainLine.length - 1],
-          parent
-        )
-      ) {
+      if (this.areSameMove(this.mainLine[this.mainLine.length - 1], parent)) {
         this.mainLine.push({ move: node.move, nodeId: node.nodeId });
       }
       // *Or else create the node..
@@ -160,6 +157,7 @@ export class GameTree {
     return chess;
   }
 
+  // ! This will give list of moves for main line.
   getMainLineHistory() {
     const chess = new Chess();
     for (let j = 1; j < this.mainLine.length; j++) {
@@ -179,5 +177,14 @@ export class GameTree {
       obj.children.push(this.getJSON(child));
     }
     return obj;
+  }
+
+  lastNode() {
+    let siz = this.currentState.length - 1;
+    const newNode = new Node({
+      move: this.currentState[siz],
+      nodeId: this.idState[siz],
+    });
+    return newNode;
   }
 }

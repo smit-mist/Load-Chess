@@ -52,6 +52,7 @@ const GamePlay = () => {
     if (move === null) return false;
     return true;
   }
+  console.log("THis will be highlighed", tree.lastNode());
   return (
     <Fragment>
       <br></br>
@@ -68,17 +69,33 @@ const GamePlay = () => {
             <Card sx={{ minHeight: 520 }}>
               <Grid container justify="center" rowSpacing={1}>
                 {tree.getMainLineHistory().map((e, i) => {
+                  let isLastMove = false;
+
+                  if (
+                    i < tree.mainLine.length &&
+                    tree.areSameMove(tree.mainLine[i], tree.lastNode())
+                  ) {
+                    isLastMove = true;
+                  }
                   if (i % 2 === 0) {
                     let toPrint = i / 2 + 1;
                     return (
                       <Grid item xs={6}>
-                        <Typography variant="h5">{`${toPrint}.  ${e}`}</Typography>
+                        <Typography
+                          variant="h5"
+                          color={isLastMove ? "secondary" : "primary"}
+                        >{`${toPrint}.  ${e}`}</Typography>
                       </Grid>
                     );
                   }
                   return (
                     <Grid item xs={6}>
-                      <Typography variant="h5">{e}</Typography>
+                      <Typography
+                        variant="h5"
+                        color={isLastMove ? "secondary" : "primary"}
+                      >
+                        {e}
+                      </Typography>
                     </Grid>
                   );
                 })}
