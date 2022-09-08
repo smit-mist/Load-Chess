@@ -16,7 +16,7 @@ const GamePlay = () => {
   const [tree, setTree] = useState(new GameTree());
 
   if (!tree.root) {
-    tree.addNode({ move: "", name: "" });
+    tree.addNode({ move: { from: "", to: "" }, name: "" });
     setTree(tree);
   }
   function makeAMove(move) {

@@ -32,7 +32,10 @@ export class GameTree {
     }
     return null;
   }
-
+  areSameMove(a, b) {
+    if (a.move?.to === b.move?.to && a.move?.from === b.move?.from) return true;
+    return false;
+  }
   // ! Function to add a children to given parentId. If parentId not found will make the current node root.
   addNode(data, parentId) {
     const toPass = data;
@@ -55,7 +58,12 @@ export class GameTree {
         }
       }
       const node = new Node(toPass);
-      if (parentId === this.mainLine[this.mainLine.length - 1].nodeId) {
+      if (
+        this.areSameMove(
+          this.mainLine[this.mainLine.length - 1],
+          parent
+        )
+      ) {
         this.mainLine.push({ move: node.move, nodeId: node.nodeId });
       }
       // *Or else create the node..
@@ -77,13 +85,14 @@ export class GameTree {
     const lastNode = this.idState[this.idState.length - 1];
     for (let j = 0; j < this.mainLine.length - 1; j++) {
       if (this.mainLine[j].nodeId === lastNode) {
-        this.currentState.push(this.mainLine[j + 1].move);
-        this.idState.push(this.mainLine[j + 1].nodeId);
-        return;
+        if (!data || this.areSameMove(this.mainLine[j + 1], data)) {
+          this.currentState.push(this.mainLine[j + 1].move);
+          this.idState.push(this.mainLine[j + 1].nodeId);
+          return;
+        }
       }
     }
-    if(!data)
-      return;
+    if (!data) return;
     this.addNode(data, lastNode);
   }
 
@@ -153,7 +162,7 @@ export class GameTree {
 
   getMainLineHistory() {
     const chess = new Chess();
-    for (let j = 0; j < this.mainLine.length; j++) {
+    for (let j = 1; j < this.mainLine.length; j++) {
       chess.move(this.mainLine[j].move);
     }
     return chess.history();
