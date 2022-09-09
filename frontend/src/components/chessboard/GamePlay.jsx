@@ -10,6 +10,7 @@ import { Grid, Paper, Card, Typography, Divider } from "@mui/material";
 import Tree from "react-d3-tree";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import GameState from "./GameState";
 
 const GamePlay = () => {
   const [game, setGame] = useState(new Chess());
@@ -121,7 +122,7 @@ const GamePlay = () => {
           </Paper>
         </Grid>
       </Grid>
-      <Paper elevation={5} sx={{ minHeight: 500 }}>
+      {/* <Paper elevation={5} sx={{ minHeight: 500 }}>
         <div id="treeWrapper" style={{ height: 500 }}>
           <Tree
             data={tree.getJSON(tree.root)}
@@ -130,6 +131,8 @@ const GamePlay = () => {
           />
         </div>
       </Paper>
+       */}
+       <GameState data={tree.getJSON(tree.root)}/>
     </Fragment>
   );
 };
