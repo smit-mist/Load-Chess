@@ -104,24 +104,37 @@ export class GameTree {
       }
     }
     console.log("Final seq", finalSeq);
+    console.log({move:finalSeq[0]});
     let temp = this.root;
     this.currentState = [];
     this.idState = [];
-    let ind = 0;
-    while (temp.nodeId !== newNodeId) {
+    let ind = 1;
+    while (1) {
+      console.log("INSIDE" ,temp);
       this.currentState.push(temp.move);
       this.idState.push(temp.nodeId);
+
+      if(temp.nodeId === newNodeId)break;
       for (let j = 0; j < temp.children.length; j++) {
         const child = temp.children[j];
-        if (child.move === finalSeq[ind]) {
+        console.log(child,{move:finalSeq[ind]});
+        if (this.areSameMove(child, {move:finalSeq[ind]})) {
           ind++;
           temp = child;
+          console.log("MAtch found");
+          break;
+        }
+        if(j === temp.children.length-1){
+          temp = child;
+           console.log("Forced");
           break;
         }
       }
+      
     }
 
     console.log("after completing");
+    console.log("CURRENT AND ID");
     console.log(this.currentState, this.idState);
 
     // *Updating main line...
