@@ -6,6 +6,7 @@ import "./index.css";
 const GameState = (props) => {
   const handleNodeClick = (nodeDatum) => {
     console.log("This node is clicked", nodeDatum);
+    props.callBackToChangeMainLine(nodeDatum.nodeId);
   };
 
   const renderNodeWithCustomEvents = ({ nodeDatum, handleNodeClick }) => {
@@ -24,7 +25,6 @@ const GameState = (props) => {
         <circle
           r="15"
           onClick={() => handleNodeClick(nodeDatum)}
-          // stroke="#000000"
           fill={color}
         />
         <text fill="black" x="20" dy="20" strokeWidth="1">

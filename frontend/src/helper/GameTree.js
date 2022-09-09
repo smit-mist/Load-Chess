@@ -83,25 +83,27 @@ export class GameTree {
   // ! Update the mainline of the game.
   changeLine(newNodeId) {
     const queue = [this.root];
-    const moveArray = [[]];
+    const moveArray = [[this.root.move]];
     let finalSeq = [];
-
+    console.log("Inside change line", newNodeId);
     // ?Using bfs to find the whole sequence of move to the given node.
     while (queue.length > 0) {
       const currNode = queue.shift();
       const currState = moveArray.shift();
+      console.log(currNode, currState);
       if (currNode.nodeId === newNodeId) {
         finalSeq = currState;
         break;
       }
       for (let j = 0; j < currNode.children.length; j++) {
         const childs = currNode.children[j];
-        const temp = currState;
+        const temp = [...currState];
         temp.push(childs.move);
         queue.push(childs);
         moveArray.push(temp);
       }
     }
+    console.log("Final seq", finalSeq);
     let temp = this.root;
     this.currentState = [];
     this.idState = [];
@@ -119,6 +121,9 @@ export class GameTree {
       }
     }
 
+    console.log("after completing");
+    console.log(this.currentState, this.idState);
+
     // *Updating main line...
     this.mainLine = [];
     for (let i = 0; i < this.currentState.length; i++) {
@@ -127,6 +132,7 @@ export class GameTree {
         nodeId: this.idState[i],
       });
     }
+    console.log(this.mainLine);
   }
 
   // ? Read something

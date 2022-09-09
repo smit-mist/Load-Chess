@@ -53,6 +53,15 @@ const GamePlay = () => {
     if (move === null) return false;
     return true;
   }
+
+  function makeNodeMainLine(id) {
+    console.log("Main function called", id);
+    console.log(tree.mainLine);
+    tree.changeLine(id);
+    console.log(tree.mainLine);
+    setTree(tree);
+    setGame(tree.getCurrentGame());
+  }
   return (
     <Fragment>
       <br></br>
@@ -72,8 +81,8 @@ const GamePlay = () => {
                   let isLastMove = false;
 
                   if (
-                    i+1 < tree.mainLine.length &&
-                    tree.areSameMove(tree.mainLine[i+1], tree.lastNode())
+                    i + 1 < tree.mainLine.length &&
+                    tree.areSameMove(tree.mainLine[i + 1], tree.lastNode())
                   ) {
                     isLastMove = true;
                   }
@@ -121,17 +130,11 @@ const GamePlay = () => {
           </Paper>
         </Grid>
       </Grid>
-      {/* <Paper elevation={5} sx={{ minHeight: 500 }}>
-        <div id="treeWrapper" style={{ height: 500 }}>
-          <Tree
-            data={tree.getJSON(tree.root)}
-            enableLegacyTransitions={true}
-            translate={{ x: 30, y: 270 }}
-          />
-        </div>
-      </Paper>
-       */}
-       <GameState data={tree.getJSON(tree.root)} tree={tree}/>
+      <GameState
+        data={tree.getJSON(tree.root)}
+        tree={tree}
+        callBackToChangeMainLine={makeNodeMainLine}
+      />
     </Fragment>
   );
 };
