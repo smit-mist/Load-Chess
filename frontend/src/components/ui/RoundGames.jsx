@@ -16,7 +16,6 @@ const RoundGames = (props) => {
     }
     setLoading(true);
     isCalled = roundId;
-    console.log("Fetching roundId");
     const apiUrl = `https://lichess.org/api/broadcast/round/${roundId}.pgn`;
     const response = await axios.get(apiUrl);
     let allGames = [];

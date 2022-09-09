@@ -53,7 +53,6 @@ const GamePlay = () => {
     if (move === null) return false;
     return true;
   }
-  console.log("THis will be highlighed", tree.lastNode());
   return (
     <Fragment>
       <br></br>

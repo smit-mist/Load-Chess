@@ -33,9 +33,7 @@ export class GameTree {
     return null;
   }
   areSameMove(a, b) {
-    console.log(a, b);
     if (a.move?.to === b.move?.to && a.move?.from === b.move?.from) return true;
-    console.log("Both are different");
     return false;
   }
   // ! Function to add a children to given parentId. If parentId not found will make the current node root.
@@ -171,6 +169,7 @@ export class GameTree {
     // ?Tree is not updating after last commit.
     const obj = {};
     obj.name = startFrom.name;
+    obj.nodeId = startFrom.nodeId;
     obj.children = [];
     for (let j = 0; j < startFrom.children.length; j++) {
       const child = startFrom.children[j];

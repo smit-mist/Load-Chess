@@ -22,9 +22,7 @@ const Analysis = () => {
       }
       // rnb1kbnr/ppp2ppp/8/q7/4p3/2NP1N2/PPP2PPP/R1BQKB1R w KQkq - 0 6
     }
-    console.log(withoutSpace);
     const { data } = await axios.get(`https://explorer.lichess.ovh/masters?fen=${withoutSpace}`);
-    console.log("engine", data);
   };
   useEffect(() => {
     engineEval();
