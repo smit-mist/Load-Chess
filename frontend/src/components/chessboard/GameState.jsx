@@ -42,16 +42,9 @@ const GameState = (props) => {
           data={props.data}
           enableLegacyTransitions={true}
           translate={{ x: 30, y: 270 }}
-          // rootNodeClassName="node__root"
-          // branchNodeClassName="node__branch"
-          // leafNodeClassName="node__leaf"
-          // pathClassFunc={getDynamicPathClass}
           renderCustomNodeElement={(rd3tProps) =>
             renderNodeWithCustomEvents({ ...rd3tProps, handleNodeClick })
           }
-          // onNodeClick={(e) => {
-          //   console.log("This node is clicked", e);
-          // }}
         />
       </div>
     </Paper>

@@ -15,6 +15,14 @@ export class GameTree {
     this.idState = []; // ? Stores the id of each node corresponding to 'moveState[i]'.
     this.nodeId = 1; // ? Which 'nodeId' is to be given to next node.
     this.mainLine = [];
+
+    /*
+    *Few things not to forget....
+    ? 1. nodeId will be unique.
+    ? 2. move state and id state will store things about root node also.
+    ? 3. main line will store move and id for every node.
+    ? 4. root node is a node with empty string as move. and id 1.
+    */
   }
 
   // ?Manipulating tree.....
