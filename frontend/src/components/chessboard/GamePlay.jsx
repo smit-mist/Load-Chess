@@ -72,8 +72,8 @@ const GamePlay = () => {
                   let isLastMove = false;
 
                   if (
-                    i < tree.mainLine.length &&
-                    tree.areSameMove(tree.mainLine[i], tree.lastNode())
+                    i+1 < tree.mainLine.length &&
+                    tree.areSameMove(tree.mainLine[i+1], tree.lastNode())
                   ) {
                     isLastMove = true;
                   }
