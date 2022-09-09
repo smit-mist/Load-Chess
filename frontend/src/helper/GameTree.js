@@ -17,25 +17,8 @@ export class GameTree {
     this.mainLine = [];
   }
 
-  // ! Given a 'nodeId' find the node with that id. BFS is used.
-  findNode(data) {
-    const queue = [this.root];
-    while (queue.length > 0) {
-      const currNode = queue.shift();
-      if (currNode.nodeId === data) {
-        return currNode;
-      }
+  // ?Manipulating tree.....
 
-      for (let i = 0; i < currNode.children.length; i++) {
-        queue.push(currNode.children[i]);
-      }
-    }
-    return null;
-  }
-  areSameMove(a, b) {
-    if (a.move?.to === b.move?.to && a.move?.from === b.move?.from) return true;
-    return false;
-  }
   // ! Function to add a children to given parentId. If parentId not found will make the current node root.
   addNode(data, parentId) {
     const toPass = data;
@@ -146,6 +129,8 @@ export class GameTree {
     }
   }
 
+  // ? Read something
+
   // ! Returns a chess game with moves made based on current state.
   getCurrentGame() {
     const chess = new Chess();
@@ -185,5 +170,27 @@ export class GameTree {
       nodeId: this.idState[siz],
     });
     return newNode;
+  }
+
+  // ?Utils
+
+  // ! Given a 'nodeId' find the node with that id. BFS is used.
+  findNode(data) {
+    const queue = [this.root];
+    while (queue.length > 0) {
+      const currNode = queue.shift();
+      if (currNode.nodeId === data) {
+        return currNode;
+      }
+
+      for (let i = 0; i < currNode.children.length; i++) {
+        queue.push(currNode.children[i]);
+      }
+    }
+    return null;
+  }
+  areSameMove(a, b) {
+    if (a.move?.to === b.move?.to && a.move?.from === b.move?.from) return true;
+    return false;
   }
 }

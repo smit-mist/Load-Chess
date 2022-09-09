@@ -131,7 +131,7 @@ const GamePlay = () => {
         </div>
       </Paper>
        */}
-       <GameState data={tree.getJSON(tree.root)}/>
+       <GameState data={tree.getJSON(tree.root)} tree={tree}/>
     </Fragment>
   );
 };
