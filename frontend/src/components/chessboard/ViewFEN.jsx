@@ -1,24 +1,23 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { Chessboard } from "react-chessboard";
 import { Chess } from "chess.js";
 import { useEffect, useState } from "react";
 import Loader from "../common/Loader";
 import { loadEssentials, loadPGN } from "../../helper/ChessEditor";
-import { Skeleton } from "@mui/material";
-
-
+import { Skeleton, Typography, Card, Divider } from "@mui/material";
 const ViewFEN = (props) => {
   const { currGame } = props;
   // console.log(currGame);
   const [loading, setLoading] = useState(true);
   const [game, setGame] = useState(new Chess());
-  
+  const [gameData, setGameData] = useState({})
   const loadGame = () => {
     let temp = loadPGN(currGame);
     let ess = loadEssentials(currGame);
     let myGame = new Chess();
     myGame.load_pgn(temp);
     setGame(myGame);
+    setGameData(ess);
     setLoading(false);
   };
   useEffect(() => {
@@ -29,12 +28,20 @@ const ViewFEN = (props) => {
   }
 
   return (
-    <Chessboard
-      position={game.fen()}
-      animationDuration={500}
-      boardWidth={200}
-      arePiecesDraggable={false}
-    />
+    <Card sx={{ maxWidth: 260}} raised={true}>
+      <Typography gutterBottom={true}>
+        {gameData["Black"]}
+      </Typography> 
+      <Chessboard
+        position={game.fen()}
+        animationDuration={500}
+        boardWidth={250}
+        arePiecesDraggable={false}
+      />
+       <Typography gutterBottom={true}>
+        {gameData["White"]}
+      </Typography>
+    </Card>
   );
 };
 
