@@ -7,10 +7,21 @@ export function breakPipe(s) {
       now = "";
     } else {
       now = now + s[i];
-      if(i == s.length - 1){
+      if (i === s.length - 1) {
         curr.push(now);
       }
     }
   }
   return curr;
+}
+
+export function removeInverted(s) {
+  let finalAns = "";
+  for (let i = 0; i < s.length; i++) {
+    if (s[i] === '"') {
+    } else {
+      finalAns += s[i];
+    }
+  }
+  return finalAns;
 }

@@ -49,8 +49,7 @@ const RoundGames = (props) => {
   if (loading) {
     return <Loader />;
   }
-  let till = 12;
-
+  let till = 20;
   return (
     <Fragment>
       <Grid container rowSpacing={2} columnSpacing={2}>
