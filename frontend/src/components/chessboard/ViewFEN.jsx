@@ -10,7 +10,7 @@ const ViewFEN = (props) => {
   // console.log(currGame);
   const [loading, setLoading] = useState(true);
   const [game, setGame] = useState(new Chess());
-  const [gameData, setGameData] = useState({})
+  const [gameData, setGameData] = useState({});
   const loadGame = () => {
     let temp = loadPGN(currGame);
     let ess = loadEssentials(currGame);
@@ -24,23 +24,26 @@ const ViewFEN = (props) => {
     loadGame();
   }, []);
   if (loading) {
-    return <Skeleton variant="rectangular" width={200} height={200} />;
+    return (
+      <Card sx={{ maxWidth: 260 }} raised={true}>
+        <Skeleton variant="rectangular" width={200} height={50} />
+
+        <Skeleton variant="rectangular" width={200} height={200} />
+        <Skeleton variant="rectangular" width={200} height={50} />
+      </Card>
+    );
   }
 
   return (
-    <Card sx={{ maxWidth: 260}} raised={true}>
-      <Typography gutterBottom={true}>
-        {gameData["Black"]}
-      </Typography> 
+    <Card sx={{ maxWidth: 260 }} raised={true}>
+      <Typography gutterBottom={true}>{gameData["Black"]}</Typography>
       <Chessboard
         position={game.fen()}
         animationDuration={500}
         boardWidth={250}
         arePiecesDraggable={false}
       />
-       <Typography gutterBottom={true}>
-        {gameData["White"]}
-      </Typography>
+      <Typography gutterBottom={true}>{gameData["White"]}</Typography>
     </Card>
   );
 };

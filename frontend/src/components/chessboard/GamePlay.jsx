@@ -1,6 +1,6 @@
 import React from "react";
 import { Chess } from "chess.js";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Chessboard } from "react-chessboard";
 import { GameTree } from "../../helper/GameTree";
 import ButtonGroup from "@mui/material/ButtonGroup";
@@ -12,7 +12,7 @@ import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import GameState from "./GameState";
 
-const GamePlay = () => {
+const GamePlay = (props) => {
   const [game, setGame] = useState(new Chess());
   const [tree, setTree] = useState(new GameTree());
 
@@ -62,6 +62,13 @@ const GamePlay = () => {
     setTree(tree);
     setGame(tree.getCurrentGame());
   }
+  useEffect(() => {
+    if(props.game){
+      setGame(props.game);
+      tree.loadGame(game);
+    }
+  }, [])
+  
   return (
     <Fragment>
       <br></br>

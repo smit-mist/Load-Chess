@@ -156,6 +156,12 @@ export class GameTree {
     console.log(this.mainLine);
   }
 
+  // ! Load the game tree with given game.
+  loadGame(chess){
+    console.log("Inside load chess");
+
+  }
+
   // ? Read something
 
   // ! Returns a chess game with moves made based on current state.
