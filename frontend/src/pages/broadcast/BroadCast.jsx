@@ -52,7 +52,7 @@ const BroadCast = () => {
       <Grid container rowSpacing={3} columnSpacing={3} my={5} mx={10}>
         {items.map((curr) => {
           return (
-            <Grid xs={4} sx={{ height: 400 }}>
+            <Grid xs={4} sx={{ height: 400 }} key={curr.value.tour.name}>
               <TournamentCard tour={curr.value}/>
             </Grid>
           );

@@ -31,7 +31,7 @@ export default function TournamentCard(props) {
             {tourName.map((i) => {
               if (i == tourName[0]) {
                 return (
-                  <Typography gutterBottom variant="body1" component="div">
+                  <Typography key={i} gutterBottom variant="body1" component="div">
                     {i}
                   </Typography>
                 );
@@ -40,7 +40,7 @@ export default function TournamentCard(props) {
             <Divider sx={{ m: 1 }} />
             {desc.map((i) => {
               return (
-                <Chip sx={{ m: 0.5, p: 0.5 }} label={i} variant="outlined" />
+                <Chip sx={{ m: 0.5, p: 0.5 }} key={i} label={i} variant="outlined" />
               );
             })}
           </CardContent>
