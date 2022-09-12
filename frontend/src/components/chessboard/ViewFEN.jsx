@@ -5,8 +5,11 @@ import { useEffect, useState } from "react";
 import Loader from "../common/Loader";
 import { loadEssentials, loadPGN } from "../../helper/ChessEditor";
 import { Skeleton, Typography, Card, Divider } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+
 const ViewFEN = (props) => {
   const { currGame, ...rest } = props;
+  const navigate = useNavigate();
   // console.log(currGame);
   const [loading, setLoading] = useState(true);
   const [game, setGame] = useState(new Chess());
@@ -35,7 +38,10 @@ const ViewFEN = (props) => {
   }
 
   return (
-    <Card sx={{ maxWidth: 260 }} raised={true} {...rest}>
+    <Card sx={{ maxWidth: 260 }} raised={true} {...rest} onClick={()=>{
+      console.log("Sending", game);
+      navigate("/analysis", {state:game.pgn()});
+    }}>
       <Typography gutterBottom={true}>{gameData["Black"]}</Typography>
       <Chessboard
         position={game.fen()}

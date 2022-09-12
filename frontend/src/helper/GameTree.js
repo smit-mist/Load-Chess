@@ -112,33 +112,32 @@ export class GameTree {
       }
     }
     console.log("Final seq", finalSeq);
-    console.log({move:finalSeq[0]});
+    console.log({ move: finalSeq[0] });
     let temp = this.root;
     this.currentState = [];
     this.idState = [];
     let ind = 1;
     while (1) {
-      console.log("INSIDE" ,temp);
+      console.log("INSIDE", temp);
       this.currentState.push(temp.move);
       this.idState.push(temp.nodeId);
 
-      if(temp.nodeId === newNodeId)break;
+      if (temp.nodeId === newNodeId) break;
       for (let j = 0; j < temp.children.length; j++) {
         const child = temp.children[j];
-        console.log(child,{move:finalSeq[ind]});
-        if (this.areSameMove(child, {move:finalSeq[ind]})) {
+        console.log(child, { move: finalSeq[ind] });
+        if (this.areSameMove(child, { move: finalSeq[ind] })) {
           ind++;
           temp = child;
           console.log("MAtch found");
           break;
         }
-        if(j === temp.children.length-1){
+        if (j === temp.children.length - 1) {
           temp = child;
-           console.log("Forced");
+          console.log("Forced");
           break;
         }
       }
-      
     }
 
     console.log("after completing");
@@ -157,9 +156,14 @@ export class GameTree {
   }
 
   // ! Load the game tree with given game.
-  loadGame(chess){
+  loadGame(chess) {
     console.log("Inside load chess");
-
+    for (let j = 0; j < chess.history().length; j++) {
+      this.makeMove({
+        move: chess.history()[j],
+        name: chess.history()[j],
+      });
+    }
   }
 
   // ? Read something
@@ -223,6 +227,8 @@ export class GameTree {
     return null;
   }
   areSameMove(a, b) {
+    if(a === b)return true;
+    return false;
     if (a.move?.to === b.move?.to && a.move?.from === b.move?.from) return true;
     return false;
   }

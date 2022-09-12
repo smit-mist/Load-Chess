@@ -11,8 +11,12 @@ import Tree from "react-d3-tree";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import GameState from "./GameState";
+import { useLocation } from "react-router-dom";
 
-const GamePlay = (props) => {
+const GamePlay = () => {
+  const location = useLocation();
+  console.log(location, "printing");
+
   const [game, setGame] = useState(new Chess());
   const [tree, setTree] = useState(new GameTree());
 
@@ -63,12 +67,18 @@ const GamePlay = (props) => {
     setGame(tree.getCurrentGame());
   }
   useEffect(() => {
-    if(props.game){
-      setGame(props.game);
-      tree.loadGame(game);
+    if (location.state) {
+      console.log(location.state, "printing");
+      const tempGame = new Chess();
+      tempGame.load_pgn(location.state);
+      setGame(tempGame);
+      tree.loadGame(tempGame);
+      setTree(tree);
+      
+      
     }
-  }, [])
-  
+  }, []);
+
   return (
     <Fragment>
       <br></br>
