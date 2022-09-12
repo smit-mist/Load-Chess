@@ -57,7 +57,7 @@ const RoundGames = (props) => {
           if (till > x) {
             return (
               <Grid item xs={3}>
-                <ViewFEN currGame={e} />
+                <ViewFEN key={x} currGame={e} />
               </Grid>
             );
           }
