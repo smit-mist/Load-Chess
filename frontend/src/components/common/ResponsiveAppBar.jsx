@@ -44,7 +44,7 @@ const ResponsiveAppBar = (props) => {
   };
 
   return (
-    <AppBar color = {props.color} position="static"  enableColorOnDark={true}>
+    <AppBar  position="static"  enableColorOnDark={true}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>

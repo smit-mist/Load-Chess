@@ -4,34 +4,23 @@ import { createTheme } from '@material-ui/core/styles';
 // A custom theme for this app
 export const theme1 = createTheme({
   palette: {
-    primary: {
-      main: '#000000',
-    },
-    secondary: {
-      main: '#000000',
-    },
-    error: {
-      main: "#000000",
-    },
-    background: {
-      default: '#000000',
-    },
+    mode: 'dark',
   },
 });
 
 export const theme2 = createTheme({
   palette: {
     primary: {
-      main: '#8862a1',
+      main: '#888888',
     },
     secondary: {
-      main: '#f6144a',
+      main: '#888888',
     },
     error: {
       main: red.A400,
     },
     background: {
-      default: '#fff',
+      default: '#888888',
     },
   },
 });
