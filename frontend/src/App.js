@@ -14,18 +14,16 @@ const darkTheme = createTheme({
   palette: {
     mode: "dark",
     primary: {
-      main: "#ff4400",
+      main: "#16213E",
     },
     secondary: {
-      light: "#0066ff",
-      main: "#0044ff",
-      contrastText: "#ffcc00",
+      main: "#0F3460",
     },
-    custom: {
-      light: "#ffa726",
-      main: "#f57c00",
-      dark: "#ef6c00",
-      contrastText: "rgba(0, 0, 0, 0.87)",
+    third: {
+      main:"#533483"
+    },
+    error:{
+      main:"#E94560"
     },
     contrastThreshold: 3,
     tonalOffset: 0.2,
@@ -34,6 +32,7 @@ const darkTheme = createTheme({
 
 function App() {
   return (
+    <ThemeProvider theme={darkTheme}>
       <Router>
         <Routes>
           <Route path="/signin" element={<SignIn />} />
@@ -52,6 +51,7 @@ function App() {
           </Route>
         </Routes>
       </Router>
+    </ThemeProvider>
   );
 }
 

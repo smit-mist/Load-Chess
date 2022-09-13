@@ -24,7 +24,6 @@ const ExampleComponent = () => {
         "Improve Chess", // Types 'Three' without deleting 'Two'
        2000,
         () => {
-          console.log("Done typing!"); // Place optional callbacks anywhere in the array
         },
       ]}
       wrapper="div"
