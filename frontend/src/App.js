@@ -8,8 +8,7 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { red } from "@mui/material/colors";
 import SignIn from "./pages/auth/SignIn";
 import UserBasic from "./pages/auth/UserBasic";
-
-
+import Home from "./pages/Home";
 
 const darkTheme = createTheme({
   palette: {
@@ -35,12 +34,11 @@ const darkTheme = createTheme({
 
 function App() {
   return (
-    <ThemeProvider theme={darkTheme}>
       <Router>
         <Routes>
           <Route path="/signin" element={<SignIn />} />
           <Route path="/" element={<UserBasic />}>
-            <Route path="/" exact={true} element={<h1>This is home</h1>} />
+            <Route path="/" exact={true} element={<Home />} />
             <Route path="/analysis" element={<GamePlay />} />
             <Route path="/tv" element={<ChessTV />} />
             <Route path="/news" element={<h1>This is News</h1>} />
@@ -54,7 +52,6 @@ function App() {
           </Route>
         </Routes>
       </Router>
-    </ThemeProvider>
   );
 }
 

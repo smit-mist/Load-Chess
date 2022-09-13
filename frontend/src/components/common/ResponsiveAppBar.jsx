@@ -1,3 +1,4 @@
+import { TypeAnimation } from "react-type-animation";
 import * as React from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -12,6 +13,27 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import { useNavigate } from "react-router-dom";
+const ExampleComponent = () => {
+  return (
+    <TypeAnimation
+      sequence={[
+        "Load Chess", // Types 'One'
+        2000, // Waits 1s
+        "Learn Chess", // Deletes 'One' and types 'Two'
+        2000, // Waits 2s
+        "Improve Chess", // Types 'Three' without deleting 'Two'
+       2000,
+        () => {
+          console.log("Done typing!"); // Place optional callbacks anywhere in the array
+        },
+      ]}
+      wrapper="div"
+      cursor={true}
+      repeat={Infinity}
+      style={{ fontSize: "2em" }}
+    />
+  );
+};
 
 const settings = ["Profile", "Logout"];
 const url = ["/profile", "/admin/SignIn"];
@@ -44,7 +66,7 @@ const ResponsiveAppBar = (props) => {
   };
 
   return (
-    <AppBar  position="static"  enableColorOnDark={true}>
+    <AppBar position="static" enableColorOnDark={true}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -86,25 +108,9 @@ const ResponsiveAppBar = (props) => {
               ))}
             </Menu>
           </Box>
-
-          <Typography
-            variant="h5"
-            noWrap
-            component="a"
-            href=""
-            sx={{
-              mr: 2,
-              display: { xs: "flex", md: "none" },
-              flexGrow: 1,
-              fontFamily: "monospace",
-              fontWeight: 700,
-              letterSpacing: ".3rem",
-              color: "inherit",
-              textDecoration: "none",
-            }}
-          >
-            LDCE
-          </Typography>
+          <Box sx={{minWidth:200}}>
+            <ExampleComponent />
+          </Box>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page, index) => (
               <Button
