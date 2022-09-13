@@ -7,11 +7,8 @@ import { Chip, Grid, TablePagination, Typography } from "@mui/material";
 import RoundGames from "../../components/ui/RoundGames";
 import SwipeableViews from "react-swipeable-views";
 import Tabs from "@mui/material/Tabs";
-import {Paper} from "@mui/material";
+import { Paper } from "@mui/material";
 import Tab from "@mui/material/Tab";
-
-
-
 
 let isCalled = false;
 
@@ -19,7 +16,7 @@ function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
   return (
-    <Paper sx={{margin:2, minWidth:500, minHeight:500}}>
+    <Paper sx={{ margin: 2, minWidth: 500, minHeight: 500 }}>
       <div
         role="tabpanel"
         hidden={value !== index}
@@ -44,7 +41,7 @@ const RoundTabs = ({ rounds }) => {
   function a11yProps(index) {
     return {
       id: `full-width-tab-${index}`,
-       "aria-controls": `full-width-tabpanel-${index}`,
+      "aria-controls": `full-width-tabpanel-${index}`,
     };
   }
   return (
@@ -60,7 +57,7 @@ const RoundTabs = ({ rounds }) => {
         aria-label="full width tabs example"
       >
         {rounds.map((obj, key) => {
-          return <Tab label={obj.name} {...a11yProps(key)} key={obj.name}/>;
+          return <Tab label={obj.name} {...a11yProps(key)} key={obj.name} />;
         })}
         {/* <Tab label="Item One" {...a11yProps(0)} />
         <Tab label="Item Two" {...a11yProps(1)} />
@@ -124,28 +121,6 @@ const DisplayTournament = () => {
         {currentTour.tour.name}
       </Typography>
       <Grid container rowSpacing={1} columnSpacing={2}>
-        {/* {currentTour.rounds.map((obj, key) => {
-          console.log(obj, "this is round");
-          if (round === key) {
-            return (
-              <Grid item>
-                <Chip label={obj.name} color="info" />
-              </Grid>
-            );
-          } else {
-            return (
-              <Grid item>
-                <Chip
-                  label={obj.name}
-                  variant="outlined"
-                  onClick={() => {
-                    setRound(key);
-                  }}
-                />
-              </Grid>
-            );
-          }
-        })} */}
         <RoundTabs rounds={currentTour.rounds} />
       </Grid>
 

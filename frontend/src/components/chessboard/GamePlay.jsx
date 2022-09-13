@@ -15,7 +15,6 @@ import { useLocation } from "react-router-dom";
 
 const GamePlay = () => {
   const location = useLocation();
-  console.log(location, "printing");
 
   const [game, setGame] = useState(new Chess());
   const [tree, setTree] = useState(new GameTree());
@@ -59,16 +58,12 @@ const GamePlay = () => {
   }
 
   function makeNodeMainLine(id) {
-    console.log("Main function called", id);
-    console.log(tree.mainLine);
     tree.changeLine(id);
-    console.log(tree.mainLine);
     setTree(tree);
     setGame(tree.getCurrentGame());
   }
   useEffect(() => {
     if (location.state) {
-      console.log(location.state, "printing");
       const tempGame = new Chess();
       tempGame.load_pgn(location.state);
       setGame(tempGame);

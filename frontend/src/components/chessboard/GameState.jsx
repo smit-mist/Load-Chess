@@ -5,7 +5,6 @@ import "./index.css";
 
 const GameState = (props) => {
   const handleNodeClick = (nodeDatum) => {
-    console.log("This node is clicked", nodeDatum);
     props.callBackToChangeMainLine(nodeDatum.nodeId);
   };
 
