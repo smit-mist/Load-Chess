@@ -1,18 +1,23 @@
-import React from "react";
+import React, { Fragment } from "react";
 import {
   TextField,
   Button,
   Paper,
   Box,
+  Grid,
+  Typography,
+  Avatar,
+  Divider,
 } from "@mui/material";
 import "react-toastify/dist/ReactToastify.css";
 import { useState } from "react";
 import { getBasicDetails } from "../api/lichessUser";
 import { toast, ToastContainer } from "react-toastify";
+import { useEffect } from "react";
+import ReactCountryFlag from "react-country-flag";
 
-const Form = () => {
-  const [userName, setUserName] = useState("");
-  const [profile, setProfile] = useState({});
+const Form = (props) => {
+  const [userName, setUserName] = useState("smit_37_mistry");
   const onSubmit = async (e) => {
     e.preventDefault();
     toast.dismiss();
@@ -28,7 +33,7 @@ const Form = () => {
       toast.success("Profile Fetched", {
         autoClose: 2000,
       });
-      setProfile(here);
+      props.setProfile(here);
     } catch (e) {
       toast.dismiss();
       console.log("Error", e, e.message);
@@ -39,31 +44,76 @@ const Form = () => {
     }
   };
   return (
-    <Paper sx={{ maxWidth: 250, margin: 2, padding: 5 }} elevation={17}>
+    <Fragment>
       <ToastContainer />
 
-      <TextField
-        id="outlined-basic"
-        label="LiChess ID"
-        variant="outlined"
-        value={userName}
-        onChange={(e) => {
-          setUserName(e.target.value);
-        }}
-      />
-      <br />
-      <br />
-      <Button variant="contained" onClick={(e) => onSubmit(e)}>
-        Visualize
-      </Button>
-    </Paper>
+      <Paper sx={{ height: 120, margin: 2, padding: 3 }} elevation={17}>
+        <TextField
+          id="outlined-basic"
+          label="Lichess Id"
+          variant="outlined"
+          fullWidth={true}
+          value={userName}
+          onChange={(e) => {
+            setUserName(e.target.value);
+          }}
+        />
+        <br />
+        <br />
+        <Button variant="contained" onClick={(e) => onSubmit(e)}>
+          Visualize
+        </Button>
+      </Paper>
+    </Fragment>
   );
 };
-const Home = () => {
+
+const ProfileTile = (props) => {
+  const { profile } = props;
   return (
-    <Box alignItems="center">
-      <Form />
-    </Box>
+    <Fragment>
+      <Paper sx={{ height: 120, margin: 2, padding: 3 }} elevation={17}>
+        <Grid container>
+          <Grid item>
+            <Avatar  sx={{ width: 32, height: 32, mr:2 }}>
+              <ReactCountryFlag
+                countryCode={profile.profile.country}
+                svg
+                style={{
+                  width: "2em",
+                  height: "2em",
+                }}
+                title={profile.profile.country}
+              />
+            </Avatar>
+          </Grid>
+          <Grid item>
+            <Typography variant="h5">{profile.id}</Typography>
+          </Grid>
+        </Grid>
+        <Divider/>
+
+      </Paper>
+    </Fragment>
+  );
+};
+
+const Home = () => {
+  const [profile, setProfile] = useState({});
+
+  useEffect(() => {
+    console.log("profile changed", profile);
+  }, [profile]);
+
+  return (
+    <Grid container justifyContent="center">
+      <Grid item xs={3}>
+        <Form setProfile={setProfile} />
+      </Grid>
+      <Grid item xs={6}>
+        <ProfileTile profile={profile} />
+      </Grid>
+    </Grid>
   );
 };
 
