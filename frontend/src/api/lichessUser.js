@@ -10,7 +10,7 @@ export const getBasicDetails = async (userId) => {
       return response.data;
     }
   } catch (e) {
-    console.error("ERROR", e.response.data.error);
-    throw Error(e.response.data.error);
+    console.error("ERROR", e);
+    throw Error(e?.response?.data?.error?? "Something went wrong :(");
   }
 };

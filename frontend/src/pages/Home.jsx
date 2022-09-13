@@ -3,11 +3,12 @@ import {
   TextField,
   Button,
   Paper,
-  Box,
   Grid,
   Typography,
   Avatar,
   Divider,
+  Link,
+  Chip,
 } from "@mui/material";
 import "react-toastify/dist/ReactToastify.css";
 import { useState } from "react";
@@ -15,6 +16,7 @@ import { getBasicDetails } from "../api/lichessUser";
 import { toast, ToastContainer } from "react-toastify";
 import { useEffect } from "react";
 import ReactCountryFlag from "react-country-flag";
+import LaunchTwoToneIcon from "@mui/icons-material/LaunchTwoTone";
 
 const Form = (props) => {
   const [userName, setUserName] = useState("smit_37_mistry");
@@ -70,29 +72,59 @@ const Form = (props) => {
 
 const ProfileTile = (props) => {
   const { profile } = props;
+  const toDisplay = [];
+  const dateFormat = new Date(profile.createdAt);
+  toDisplay.push(`Joined ${dateFormat.toLocaleString().split(",")[0]}`);
+  console.log(profile);
+  let curr = 0;
+  for (const [key, value] of Object.entries(profile.perfs)) {
+    curr++;
+  }
+  toDisplay.push(`Played ${curr} formats`);
+  console.log(toDisplay);
   return (
     <Fragment>
       <Paper sx={{ height: 120, margin: 2, padding: 3 }} elevation={17}>
         <Grid container>
           <Grid item>
-            <Avatar  sx={{ width: 32, height: 32, mr:2 }}>
-              <ReactCountryFlag
-                countryCode={profile.profile.country}
-                svg
-                style={{
-                  width: "2em",
-                  height: "2em",
-                }}
-                title={profile.profile.country}
-              />
-            </Avatar>
+            {profile && profile.profile && profile.profile.country && (
+              <Avatar sx={{ width: 30, height: 30, mr: 1, mb: 1 }}>
+                <ReactCountryFlag
+                  countryCode={profile.profile.country}
+                  svg
+                  style={{
+                    width: "2em",
+                    height: "2em",
+                  }}
+                  title={profile.profile.country}
+                />
+              </Avatar>
+            )}
           </Grid>
           <Grid item>
-            <Typography variant="h5">{profile.id}</Typography>
+            <Link
+              href={profile.url}
+              target="__blank"
+              underline="none"
+              color="white"
+            >
+              <Typography variant="h6">{profile.id}</Typography>
+            </Link>
           </Grid>
+          <Grid item></Grid>
         </Grid>
-        <Divider/>
-
+        <Divider />
+        {toDisplay.map((str) => {
+          return (
+            <Chip
+              sx={{ mt: 1, ml: 1 }}
+              label={str}
+              color="success"
+              key={str}
+              variant="outlined"
+            />
+          );
+        })}
       </Paper>
     </Fragment>
   );
@@ -100,19 +132,20 @@ const ProfileTile = (props) => {
 
 const Home = () => {
   const [profile, setProfile] = useState({});
-
+  const [isLoaded, setIsLoaded] = useState(false);
   useEffect(() => {
-    console.log("profile changed", profile);
+    if (profile.id) setIsLoaded(true);
   }, [profile]);
-
   return (
     <Grid container justifyContent="center">
       <Grid item xs={3}>
         <Form setProfile={setProfile} />
       </Grid>
-      <Grid item xs={6}>
-        <ProfileTile profile={profile} />
-      </Grid>
+      {isLoaded && (
+        <Grid item xs={4}>
+          <ProfileTile profile={profile} />
+        </Grid>
+      )}
     </Grid>
   );
 };
