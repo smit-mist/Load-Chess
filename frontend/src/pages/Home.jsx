@@ -69,7 +69,25 @@ const Form = (props) => {
     </Fragment>
   );
 };
-
+function convertHMS(value) {
+  let sec = parseInt(value, 10); // convert value to number if it's string
+  let days = Math.floor(sec / (3600 * 24));
+  sec = sec - days * (3600 * 24);
+  let hours = Math.floor(sec / 3600); // get hours
+  let minutes = Math.floor((sec - hours * 3600) / 60); // get minutes
+  let seconds = sec - hours * 3600 - minutes * 60; //  get seconds
+  // add 0 if value < 10; Example: 2 => 02
+  if (hours < 10) {
+    hours = "0" + hours;
+  }
+  if (minutes < 10) {
+    minutes = "0" + minutes;
+  }
+  if (seconds < 10) {
+    seconds = "0" + seconds;
+  }
+  return days + "d " + hours + "h " + minutes + "m "; // Return is HH : MM : SS
+}
 const ProfileTile = (props) => {
   const { profile } = props;
   const toDisplay = [];
@@ -77,10 +95,21 @@ const ProfileTile = (props) => {
   toDisplay.push(`Joined ${dateFormat.toLocaleString().split(",")[0]}`);
   console.log(profile);
   let curr = 0;
+  let formatName = "",
+    rating = 0;
+
   for (const [key, value] of Object.entries(profile.perfs)) {
     curr++;
+    if (rating < value.rating) {
+      (formatName = key); (rating = value.rating);
+    }
   }
   toDisplay.push(`Played ${curr} formats`);
+  const winRate = profile.count.win / profile.count.all;
+  toDisplay.push(`Win ${(winRate * 100).toFixed(2)}%`);
+  toDisplay.push(`Time spent ${convertHMS(profile.playTime.total)}`);
+  toDisplay.push(`${rating} in ${formatName}`);
+
   console.log(toDisplay);
   return (
     <Fragment>
