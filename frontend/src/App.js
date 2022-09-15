@@ -8,7 +8,7 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { red } from "@mui/material/colors";
 import SignIn from "./pages/auth/SignIn";
 import UserBasic from "./pages/auth/UserBasic";
-import Home from "./pages/Home";
+import Home from "./pages/home/Home";
 
 const darkTheme = createTheme({
   palette: {
