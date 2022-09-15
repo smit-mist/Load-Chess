@@ -62,7 +62,7 @@ const ProfileTile = (props) => {
                 href={profile.url}
                 target="__blank"
                 underline="none"
-                color="white"
+                color="black"
               >
                 <Typography variant="h6">{profile.id}</Typography>
               </Link>
