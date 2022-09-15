@@ -69,10 +69,10 @@ const GamePlay = () => {
       setGame(tempGame);
       tree.loadGame(tempGame);
       setTree(tree);
-      
-      
     }
   }, []);
+
+  console.log(tree.mainLine);
 
   return (
     <Fragment>
