@@ -17,7 +17,7 @@ const Home = () => {
     <Fragment>
       {" "}
       <Grid container justifyContent="center">
-        <Grid item xs={3}>
+        <Grid item xs={4}>
           <UserNameForm setProfile={setProfile} />
         </Grid>
         {isLoaded && (
@@ -27,11 +27,11 @@ const Home = () => {
         )}
       </Grid>
       {isLoaded && (
-        <Grid container>
-          <Grid item xs={4}>
+        <Grid container justifyContent="center">
+          <Grid item xs={5}>
             <WinLoss profile={profile} />
           </Grid>
-          <Grid item xs={4}>
+          <Grid item xs={5}>
             <FormatPolar profile={profile} />
           </Grid>
         </Grid>
