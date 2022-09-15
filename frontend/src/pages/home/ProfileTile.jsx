@@ -21,7 +21,6 @@ const ProfileTile = (props) => {
     const toDisplay = [];
     const dateFormat = new Date(profile.createdAt);
     toDisplay.push(`Joined ${dateFormat.toLocaleString().split(",")[0]}`);
-    console.log(profile);
     let curr = 0;
     let formatName = "",
       rating = 0;

@@ -14,3 +14,17 @@ export const getBasicDetails = async (userId) => {
     throw Error(e?.response?.data?.error?? "Something went wrong :(");
   }
 };
+
+export const getRatingStats = async (userId)=>{
+  const url = `https://lichess.org/api/user/${userId}/rating-history`;
+  try{
+    const response = await axios.get(url);
+    if(response.status === 200){
+      return response.data;
+    }
+  }
+  catch(e){
+    console.error("ERROR", e);
+    throw Error(e?.response?.data?.error?? "Something went wrong :(");
+  }
+};

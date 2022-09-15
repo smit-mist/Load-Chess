@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 import { TextField, Button, Paper } from "@mui/material";
 import "react-toastify/dist/ReactToastify.css";
 import { useState } from "react";
-import { getBasicDetails } from "../../api/lichessUser";
+import { getBasicDetails, getRatingStats } from "../../api/lichessUser";
 import { toast, ToastContainer } from "react-toastify";
 
 const UserNameForm = (props) => {
@@ -18,12 +18,15 @@ const UserNameForm = (props) => {
     toast("Loading your profile", { autoClose: 1000 });
     try {
       const here = await getBasicDetails(userName);
+      const forRating = await getRatingStats(userName);
+      const fin = {...here, stats:{...forRating}};
       toast.dismiss();
 
       toast.success("Profile Fetched", {
         autoClose: 2000,
       });
-      props.setProfile(here);
+      console.log("Smit ", fin);
+      props.setProfile(fin);
     } catch (e) {
       toast.dismiss();
       console.log("Error", e, e.message);

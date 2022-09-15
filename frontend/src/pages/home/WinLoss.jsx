@@ -7,7 +7,6 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 
 const WinLoss = (props) => {
   const { draw, win, loss } = props.profile.count;
-  console.log(draw, win, loss);
 
   const data = {
     labels: ["Win", "Loss", "Draw"],

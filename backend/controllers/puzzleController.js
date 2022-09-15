@@ -12,7 +12,6 @@ const getRandomPuzzle = (req, res) => {
     .on("end", function () {
       console.log("Data loaded");
     });
-  console.log(data.length);
   return res.status(200).json({ success: true });
 };
 
