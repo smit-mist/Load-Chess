@@ -32,7 +32,6 @@ const darkTheme = createTheme({
 
 function App() {
   return (
-    <ThemeProvider theme={darkTheme}>
       <Router>
         <Routes>
           <Route path="/signin" element={<SignIn />} />
@@ -51,7 +50,6 @@ function App() {
           </Route>
         </Routes>
       </Router>
-    </ThemeProvider>
   );
 }
 
