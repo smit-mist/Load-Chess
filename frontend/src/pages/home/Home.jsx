@@ -2,10 +2,11 @@ import React, { Fragment } from "react";
 import { Grid } from "@mui/material";
 import { useState } from "react";
 import { useEffect } from "react";
-import UserNameForm from "./UserNameForm";
-import ProfileTile from "./ProfileTile";
-import WinLoss from "./WinLoss";
-import FormatPolar from "./FormatPolar";
+import UserNameForm from "./components/UserNameForm";
+import ProfileTile from "./components/ProfileTile";
+import WinLoss from "./components/WinLoss";
+import FormatPolar from "./components/FormatPolar";
+import HeatMap from "./components/HeatMap";
 
 const Home = () => {
   const [profile, setProfile] = useState({});
@@ -27,17 +28,19 @@ const Home = () => {
         )}
       </Grid>
       {isLoaded && (
-        <Grid container justifyContent="center">
-          <Grid item xs={5}>
-            <WinLoss profile={profile} />
+        <>
+          <Grid container justifyContent="center">
+            <Grid item xs={5}>
+              <WinLoss profile={profile} />
+            </Grid>
+            <Grid item xs={5}>
+              <FormatPolar profile={profile} />
+            </Grid>
           </Grid>
-          <Grid item xs={5}>
-            <FormatPolar profile={profile} />
-          </Grid>
-        </Grid>
-      )}
 
-      
+          <HeatMap profile={profile} />
+        </>
+      )}
     </Fragment>
   );
 };

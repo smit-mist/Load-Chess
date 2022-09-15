@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 import { TextField, Button, Paper } from "@mui/material";
 import "react-toastify/dist/ReactToastify.css";
 import { useState } from "react";
-import { getBasicDetails, getRatingStats } from "../../api/lichessUser";
+import { getBasicDetails, getRatingStats } from "../../../api/lichessUser";
 import { toast, ToastContainer } from "react-toastify";
 
 const UserNameForm = (props) => {
