@@ -2,18 +2,10 @@ import React from "react";
 import { Paper } from "@mui/material";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
-
+import {getRandomColor, removeCameCase} from "./utils";
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 
-function getRandomColor() {
-  var letters = '0123456789ABCDEF';
-  var color = '#';
-  for (var i = 0; i < 6; i++) {
-    color += letters[Math.floor(Math.random() * 16)];
-  }
-  return color;
-}
 
 const FormatPolar = (props) => {
   const { profile } = props;
@@ -23,7 +15,7 @@ const FormatPolar = (props) => {
   let forTot = 0;
   for (const [key, value] of Object.entries(profile.perfs)) {
     if (value.games && key !== "puzzle" && value.games > 50) {
-      name.push(key);
+      name.push(removeCameCase(key));
       games.push(value.games);
       cols.push(getRandomColor());
     }
