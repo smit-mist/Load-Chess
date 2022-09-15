@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import UserNameForm from "./UserNameForm";
 import ProfileTile from "./ProfileTile";
 import WinLoss from "./WinLoss";
+import FormatPolar from "./FormatPolar";
 
 const Home = () => {
   const [profile, setProfile] = useState({});
@@ -29,6 +30,9 @@ const Home = () => {
         <Grid container>
           <Grid item xs={4}>
             <WinLoss profile={profile} />
+          </Grid>
+          <Grid item xs={4}>
+            <FormatPolar profile={profile} />
           </Grid>
         </Grid>
       )}
