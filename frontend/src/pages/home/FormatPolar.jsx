@@ -5,21 +5,36 @@ import { Doughnut } from 'react-chartjs-2';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
+
+function getRandomColor() {
+  var letters = '0123456789ABCDEF';
+  var color = '#';
+  for (var i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+}
+
 const FormatPolar = (props) => {
   const { profile } = props;
   const name = [],
     games = [];
   const cols = [];
+  let forTot = 0;
   for (const [key, value] of Object.entries(profile.perfs)) {
-    if (value.games && key !== "puzzle") {
+    if (value.games && key !== "puzzle" && value.games > 50) {
       name.push(key);
       games.push(value.games);
-      let red = games.length * 17;
-      let blue = 255 - games.length * 15;
-      let green = games.length * 10;
-      let smit = `rgba(${red}, ${blue}, ${green}, 0.5)`;
-      cols.push(smit);
+      cols.push(getRandomColor());
     }
+    else if(value.games <= 50 && key !== "puzzle"){
+      forTot+= value.games;
+    }
+  }
+  if(forTot > 0){
+    games.push(forTot);
+    name.push("Other");
+    cols.push(getRandomColor());
   }
 
   const data = {
