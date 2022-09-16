@@ -9,6 +9,7 @@ import { red } from "@mui/material/colors";
 import SignIn from "./pages/auth/SignIn";
 import UserBasic from "./pages/auth/UserBasic";
 import Home from "./pages/home/Home";
+import { Paper } from "@mui/material";
 
 const darkTheme = createTheme({
   palette: {
@@ -25,13 +26,22 @@ const darkTheme = createTheme({
     error:{
       main:"#E94560"
     },
-    contrastThreshold: 3,
-    tonalOffset: 0.2,
+    background: {
+      default: "#000000"
+    },
+    text:{
+      primary:"#ffffff"
+    },
+    // contrastThreshold: 3,
+    // tonalOffset: 0.2,
   },
 });
 
 function App() {
   return (
+
+    <ThemeProvider theme={darkTheme}>
+    <Paper>
       <Router>
         <Routes>
           <Route path="/signin" element={<SignIn />} />
@@ -50,6 +60,9 @@ function App() {
           </Route>
         </Routes>
       </Router>
+    </Paper>
+
+      </ThemeProvider>
   );
 }
 
