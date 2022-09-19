@@ -104,7 +104,7 @@ const GamePlay = () => {
                       <Grid item xs={6}>
                         <Typography
                           variant="h5"
-                          color={isLastMove ? "secondary" : "primary"}
+                          color={isLastMove ? "white" : "error"}
                         >{`${toPrint}.  ${e}`}</Typography>
                       </Grid>
                     );
@@ -113,7 +113,7 @@ const GamePlay = () => {
                     <Grid item xs={6}>
                       <Typography
                         variant="h5"
-                        color={isLastMove ? "secondary" : "primary"}
+                        color={isLastMove ? "white" : "error"}
                       >
                         {e}
                       </Typography>
