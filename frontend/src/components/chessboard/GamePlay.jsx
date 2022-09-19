@@ -3,11 +3,9 @@ import { Chess } from "chess.js";
 import { useState, useEffect } from "react";
 import { Chessboard } from "react-chessboard";
 import { GameTree } from "../../helper/GameTree";
-import ButtonGroup from "@mui/material/ButtonGroup";
 import Button from "@mui/material/Button";
 import { Fragment } from "react";
 import { Grid, Paper, Card, Typography, Divider } from "@mui/material";
-import Tree from "react-d3-tree";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import GameState from "./GameState";
@@ -27,9 +25,12 @@ const GamePlay = () => {
     const gameCopy = { ...game };
     const result = gameCopy.move(move);
     if (!result) return result;
-    setTree(tree);
     setGame(gameCopy);
     tree.makeMove({ move, name: game.history()[game.history().length - 1] });
+    setTree(tree);
+  
+    console.log("Make move", tree.mainLine);
+
     return result;
   }
 
@@ -72,7 +73,6 @@ const GamePlay = () => {
     }
   }, []);
 
-  console.log(tree.mainLine);
 
   return (
     <Fragment>

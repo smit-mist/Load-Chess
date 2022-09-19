@@ -29,8 +29,8 @@ export class GameTree {
 
   // ! Function to add a children to given parentId. If parentId not found will make the current node root.
   addNode(data, parentId) {
-    const toPass = data;
-    toPass.nodeId = this.nodeId;
+    const newNode = data;
+    newNode.nodeId = this.nodeId;
     this.nodeId++;
     // *Store given data into 'toPass' and also, give unique node id.
     const parent = parentId ? this.findNode(parentId) : null;
@@ -38,17 +38,14 @@ export class GameTree {
     if (parent) {
       for (const childs in parent.children) {
         let smit = parent.children[childs];
-        if (
-          smit.move.to === toPass.move.to &&
-          smit.move.from === toPass.move.from
-        ) {
+        if (this.areSameMove(smit, newNode)) {
           // *If move already found visit it.
           this.currentState.push(smit.move);
           this.idState.push(smit.nodeId);
           return;
         }
       }
-      const node = new Node(toPass);
+      const node = new Node(newNode);
       if (this.areSameMove(this.mainLine[this.mainLine.length - 1], parent)) {
         this.mainLine.push({ move: node.move, nodeId: node.nodeId });
       }
@@ -58,7 +55,7 @@ export class GameTree {
       this.idState.push(node.nodeId);
     } else {
       // *If no parent is available make the current node root node.
-      const node = new Node(toPass);
+      const node = new Node(newNode);
       this.root = node;
       this.mainLine = [{ move: node.move, nodeId: node.nodeId }];
       this.currentState = [node.move];
@@ -131,7 +128,6 @@ export class GameTree {
         }
       }
     }
-
 
     // *Updating main line...
     this.mainLine = [];
@@ -213,9 +209,8 @@ export class GameTree {
     }
     return null;
   }
+
   areSameMove(a, b) {
-    if(a === b)return true;
-    return false;
     if (a.move?.to === b.move?.to && a.move?.from === b.move?.from) return true;
     return false;
   }

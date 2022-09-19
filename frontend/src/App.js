@@ -21,16 +21,16 @@ const darkTheme = createTheme({
       main: "#0F3460",
     },
     third: {
-      main:"#533483"
+      main: "#533483",
     },
-    error:{
-      main:"#E94560"
+    error: {
+      main: "#E94560",
     },
     background: {
-      default: "#000000"
+      default: "#000000",
     },
-    text:{
-      primary:"#ffffff"
+    text: {
+      primary: "#ffffff",
     },
     // contrastThreshold: 3,
     // tonalOffset: 0.2,
@@ -39,30 +39,28 @@ const darkTheme = createTheme({
 
 function App() {
   return (
-
     <ThemeProvider theme={darkTheme}>
-    <Paper>
-      <Router>
-        <Routes>
-          <Route path="/signin" element={<SignIn />} />
-          <Route path="/" element={<UserBasic />}>
-            <Route path="/" exact={true} element={<Home />} />
-            <Route path="/analysis" element={<GamePlay />} />
-            <Route path="/tv" element={<ChessTV />} />
-            <Route path="/news" element={<h1>This is News</h1>} />
-            <Route path="/broadcast" element={<BroadCast />} />
-            <Route
-              path="/tournament/:slug/:id"
-              element={<DisplayTournament />}
-            />
-            <Route path="/test" element={<Test />} />
-            <Route path="*" element={<h1>No such route</h1>} />
-          </Route>
-        </Routes>
-      </Router>
-    </Paper>
-
-      </ThemeProvider>
+      <Paper sx={{ m: 0 }}>
+        <Router>
+          <Routes>
+            <Route path="/signin" element={<SignIn />} />
+            <Route path="/" element={<UserBasic />}>
+              <Route path="/" exact={true} element={<Home />} />
+              <Route path="/analysis" element={<GamePlay />} />
+              <Route path="/tv" element={<ChessTV />} />
+              <Route path="/news" element={<h1>This is News</h1>} />
+              <Route path="/broadcast" element={<BroadCast />} />
+              <Route
+                path="/tournament/:slug/:id"
+                element={<DisplayTournament />}
+              />
+              <Route path="/test" element={<Test />} />
+              <Route path="*" element={<h1>No such route</h1>} />
+            </Route>
+          </Routes>
+        </Router>
+      </Paper>
+    </ThemeProvider>
   );
 }
 
