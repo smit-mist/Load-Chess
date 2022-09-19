@@ -1,7 +1,15 @@
+import { useState } from "react";
 import React from "react";
 import CalendarHeatmap from "react-calendar-heatmap";
-import { MenuItem, Paper, Grid, InputLabel, FormControl, Select } from "@mui/material";
-
+import {
+  MenuItem,
+  Paper,
+  Grid,
+  InputLabel,
+  FormControl,
+  Select,
+} from "@mui/material";
+import "./index.css";
 import "react-calendar-heatmap/dist/styles.css";
 
 function makeStringDate(year, month, day) {
@@ -20,13 +28,13 @@ function makeStringDate(year, month, day) {
 const HeatMap = (props) => {
   const { stats } = props.profile;
   const [year, setYear] = React.useState(2019);
+  const [selectedTile, setSelectedTile] = useState({});
   const yearOption = [2019, 2020, 2021, 2022];
 
   const handleChange = (event) => {
     setYear(event.target.value);
   };
   const contributionCounter = {};
-  console.log("Inside heat map");
   for (let j = 0; j < Object.keys(stats).length; j++) {
     const toExplore = stats[j].points;
     for (let k = 0; k < toExplore.length; k++) {
@@ -61,7 +69,6 @@ const HeatMap = (props) => {
               {yearOption.map((currYear) => {
                 return <MenuItem value={currYear}>{currYear}</MenuItem>;
               })}
-
             </Select>
           </FormControl>
         </Grid>
@@ -71,10 +78,21 @@ const HeatMap = (props) => {
         gutterSize={2}
         startDate={new Date(`${year}-01-01`)}
         endDate={new Date(`${year}-12-31`)}
-        onClick={(val) => {
-          console.log("Clicked", val);
+        classForValue={(value) => {
+          if (!value) {
+            return "color-empty";
+          }
+          let toShow = value.count;
+          if (toShow === 0) toShow = 1;
+          if (toShow > 10) toShow = 10;
+          return `color-scale-${toShow}`;
         }}
+        onClick={(value) => {
+          setSelectedTile(value);
+        }}
+        
       />
+      {selectedTile?.date + " " + selectedTile?.count}
     </Paper>
   );
 };
