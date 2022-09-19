@@ -15,6 +15,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import ReactCountryFlag from "react-country-flag";
 import UserNameForm from "./UserNameForm";
+import { removeCameCase } from "../utils";
 
 const ProfileTile = (props) => {
     const { profile } = props;
@@ -27,8 +28,8 @@ const ProfileTile = (props) => {
   
     for (const [key, value] of Object.entries(profile.perfs)) {
       curr++;
-      if (rating < value.rating) {
-        (formatName = key); (rating = value.rating);
+      if (rating < value.rating && key !== "puzzle") {
+        (formatName = removeCameCase(key)); (rating = value.rating);
       }
     }
     toDisplay.push(`Played ${curr} formats`);
@@ -62,7 +63,7 @@ const ProfileTile = (props) => {
                 href={profile.url}
                 target="__blank"
                 underline="none"
-                color="black"
+                color="white"
               >
                 <Typography variant="h6">{profile.id}</Typography>
               </Link>
@@ -75,7 +76,7 @@ const ProfileTile = (props) => {
               <Chip
                 sx={{ mt: 1, ml: 1 }}
                 label={str}
-                color="success"
+                color="error"
                 key={str}
                 variant="outlined"
               />
@@ -105,6 +106,6 @@ function convertHMS(value) {
     if (seconds < 10) {
       seconds = "0" + seconds;
     }
-    return days + "d " + hours + "h " + minutes + "m "; // Return is HH : MM : SS
+    return days + "d " + hours + "h "; // Return is HH : MM : SS
   }
 export default ProfileTile
