@@ -10,6 +10,7 @@ import SignIn from "./pages/auth/SignIn";
 import UserBasic from "./pages/auth/UserBasic";
 import Home from "./pages/home/Home";
 import { Paper } from "@mui/material";
+import "./index.css";
 
 const darkTheme = createTheme({
   palette: {

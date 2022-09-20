@@ -16,32 +16,28 @@ const PerfGraph = (props) => {
   const { profile } = props;
   const [format, setFormat] = useState("Select");
   const [val, setVal] = useState({});
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
   console.log(profile);
   const handleChange = (event) => {
     setFormat(event.target.value);
   };
 
-  const fetchDetails = async()=>{
-        const url = `https://lichess.org/api/user/${profile.username}/perf/${format}`;
-
-        const response = await axios.get(url);
-
-        if(response.status === 200){
-            console.log(response.data, "Successs");
-        }
-        else{
-
-        }
+  const fetchDetails = async () => {
+    const url = `https://lichess.org/api/user/${profile.username}/perf/${format}`;
+    const response = await axios.get(url);
+    if (response.status === 200) {
+      console.log(response.data, "Successs");
+    } else {
+    }
   };
 
   useEffect(() => {
-    if(format!=="Select"){
-        setLoading(true);
-        fetchDetails();
+    if (format !== "Select") {
+      setLoading(true);
+      fetchDetails();
     }
-  }, [format])
-  
+  }, [format]);
+
   const formatOptions = Object.keys(profile.perfs);
   formatOptions.unshift("Select");
   return (

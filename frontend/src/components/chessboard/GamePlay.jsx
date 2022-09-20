@@ -87,7 +87,7 @@ const GamePlay = () => {
         </Grid>
         <Grid item xs={4}>
           <Paper elevation={3}>
-            <Card sx={{ minHeight: 520 }}>
+            <Card sx={{ minHeight: 500 }}>
               <Grid container justify="center" rowSpacing={1}>
                 {tree.getMainLineHistory().map((e, i) => {
                   let isLastMove = false;
@@ -123,17 +123,17 @@ const GamePlay = () => {
               </Grid>
             </Card>
             <Divider />
-            <br />
+            {/* <br /> */}
             <Card sx={{ minHeight: 50 }}>
-              <Grid container justifyContent="space-evenly">
+              <Grid container justifyContent="space-evenly" sx={{m:1}}>
                 <Grid item xs={2}>
-                  <Button onClick={undoPreviousMove} variant="outlined">
+                  <Button onClick={undoPreviousMove} variant="outlined" color="error">
                     <ArrowBackIosNewIcon />
                   </Button>
                 </Grid>
 
                 <Grid item xs={2}>
-                  <Button variant="outlined" onClick={nextMove}>
+                  <Button variant="outlined" onClick={nextMove} color="error">
                     <ArrowForwardIosIcon />
                   </Button>
                 </Grid>
