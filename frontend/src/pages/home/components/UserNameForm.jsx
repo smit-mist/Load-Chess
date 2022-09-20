@@ -25,7 +25,6 @@ const UserNameForm = (props) => {
       toast.success("Profile Fetched", {
         autoClose: 2000,
       });
-      console.log("Smit ", fin);
       props.setProfile(fin);
     } catch (e) {
       toast.dismiss();

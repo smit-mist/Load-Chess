@@ -41,7 +41,6 @@ const RatingGraph = (props) => {
 
   for (let keys in Object.entries(stats)) {
     const currVal = stats[keys];
-    console.log(currVal);
     if (currVal.points) {
       plotRating[currVal.name] = {};
       currVal.points.map((dataPoint) => {

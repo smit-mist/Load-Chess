@@ -28,9 +28,6 @@ const GamePlay = () => {
     setGame(gameCopy);
     tree.makeMove({ move, name: game.history()[game.history().length - 1] });
     setTree(tree);
-  
-    console.log("Make move", tree.mainLine);
-
     return result;
   }
 
