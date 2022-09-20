@@ -59,13 +59,19 @@ const RatingGraph = (props) => {
   const labels = Object.keys(commonDates);
   const dataSet = [];
 
-  console.log(plotRating, "PRINTING RATING");
   const playingFormat = Object.keys(plotRating);
   playingFormat.map((name)=>{
-    console.log("FOR PLOT",name, plotRating[name]);
+    const theData = [];
+    let lastKnown = 1500;
+    labels.map((e)=>{
+        if(plotRating[name][e]){
+            lastKnown= plotRating[name][e];
+        }
+        theData.push(lastKnown);
+    })
     const toReturn = {
       label: name,
-      data: Object.values(plotRating[name]),
+      data: theData,
       borderColor: getRandomColor(),
       backgroundColor: "#999999",
     };
