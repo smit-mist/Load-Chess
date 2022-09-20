@@ -13,7 +13,7 @@ export function removeCameCase(s) {
   let ans = "";
   ans += an[0];
   for (let j = 1; j < s.length; j++) {
-    if (s[j] === an[j]) {
+    if (isNaN(s[j]) && s[j] === an[j]) {
       ans += " ";
       ans += s[j];
     } else {

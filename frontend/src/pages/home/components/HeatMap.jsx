@@ -16,10 +16,10 @@ function makeStringDate(year, month, day) {
   let ans = "";
   ans += year.toString();
   ans += "-";
-//  if (month < 10) ans += "0";
+  //  if (month < 10) ans += "0";
   ans += month.toString();
   ans += "-";
-//  if (day < 10) ans += "0";
+  //  if (day < 10) ans += "0";
 
   ans += day.toString();
   return ans;
@@ -91,9 +91,9 @@ const HeatMap = (props) => {
         onClick={(value) => {
           setSelectedTile(value);
         }}
-        
       />
-      {selectedTile?.date + " " + selectedTile?.count}
+
+      {selectedTile?.date ? selectedTile?.date + " " + selectedTile?.count : ""}
     </Paper>
   );
 };

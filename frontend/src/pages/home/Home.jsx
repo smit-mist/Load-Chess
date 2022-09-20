@@ -7,6 +7,7 @@ import ProfileTile from "./components/ProfileTile";
 import WinLoss from "./components/WinLoss";
 import FormatPolar from "./components/FormatPolar";
 import HeatMap from "./components/HeatMap";
+import PerfGraph from "./components/PerfGraph";
 
 const Home = () => {
   const [profile, setProfile] = useState({});
@@ -39,6 +40,7 @@ const Home = () => {
           </Grid>
 
           <HeatMap profile={profile} />
+          <PerfGraph profile={profile} />
         </>
       )}
     </Fragment>

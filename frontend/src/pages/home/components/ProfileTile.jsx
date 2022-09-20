@@ -38,7 +38,6 @@ const ProfileTile = (props) => {
     toDisplay.push(`Time spent ${convertHMS(profile.playTime.total)}`);
     toDisplay.push(`${rating} in ${formatName}`);
   
-    console.log(toDisplay);
     return (
       <Fragment>
         <Paper sx={{ height: 120, margin: 2, padding: 3 }} elevation={17}>
