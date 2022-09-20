@@ -9,7 +9,7 @@ import {
   FormControl,
   Select,
 } from "@mui/material";
-import "./index.css";
+import "../index.css";
 import "react-calendar-heatmap/dist/styles.css";
 
 function makeStringDate(year, month, day) {

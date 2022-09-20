@@ -7,8 +7,8 @@ import { toast, ToastContainer } from "react-toastify";
 
 const UserNameForm = (props) => {
   const [userName, setUserName] = useState("smit_37_mistry");
+  
   const onSubmit = async (e) => {
-    // props.setProfile({});
     e.preventDefault();
     toast.dismiss();
     if (userName.length === 0) {

@@ -3,11 +3,11 @@ import { Grid } from "@mui/material";
 import { useState } from "react";
 import { useEffect } from "react";
 import UserNameForm from "./components/UserNameForm";
-import ProfileTile from "./components/ProfileTile";
-import WinLoss from "./components/WinLoss";
-import FormatPolar from "./components/FormatPolar";
-import HeatMap from "./components/HeatMap";
-import PerfGraph from "./components/PerfGraph";
+import ProfileTile from "./components/show/ProfileTile";
+import WinLoss from "./components/show/WinLoss";
+import FormatPolar from "./components/show/FormatPolar";
+import HeatMap from "./components/show/HeatMap";
+import FormatPerfomance from "./components/FormatPerfomance";
 
 const Home = () => {
   const [profile, setProfile] = useState({});
@@ -40,7 +40,7 @@ const Home = () => {
           </Grid>
 
           <HeatMap profile={profile} />
-          <PerfGraph profile={profile} />
+          <FormatPerfomance profile={profile} />
         </>
       )}
     </Fragment>

@@ -12,7 +12,8 @@ import {
 import { useEffect } from "react";
 import axios from "axios";
 
-const PerfGraph = (props) => {
+
+const FormatPerfomance = (props) => {
   const { profile } = props;
   const [format, setFormat] = useState("Select");
   const [val, setVal] = useState({});
@@ -63,4 +64,4 @@ const PerfGraph = (props) => {
   );
 };
 
-export default PerfGraph;
+export default FormatPerfomance;

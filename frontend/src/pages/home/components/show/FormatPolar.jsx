@@ -2,7 +2,7 @@ import React from "react";
 import { Paper } from "@mui/material";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
-import {getRandomColor, removeCameCase} from "../utils";
+import {getRandomColor, removeCameCase} from "../../utils";
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 

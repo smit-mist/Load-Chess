@@ -11,11 +11,8 @@ import {
   Chip,
 } from "@mui/material";
 import "react-toastify/dist/ReactToastify.css";
-import { useState } from "react";
-import { useEffect } from "react";
 import ReactCountryFlag from "react-country-flag";
-import UserNameForm from "./UserNameForm";
-import { removeCameCase } from "../utils";
+import { removeCameCase } from "../../utils";
 
 const ProfileTile = (props) => {
     const { profile } = props;
