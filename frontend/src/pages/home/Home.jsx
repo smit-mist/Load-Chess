@@ -8,6 +8,7 @@ import WinLoss from "./components/show/WinLoss";
 import FormatPolar from "./components/show/FormatPolar";
 import HeatMap from "./components/show/HeatMap";
 import FormatPerfomance from "./components/FormatPerfomance";
+import RatingGraph from "./components/show/RatingGraph";
 
 const Home = () => {
   const [profile, setProfile] = useState({});
@@ -19,11 +20,11 @@ const Home = () => {
     <Fragment>
       {" "}
       <Grid container justifyContent="center">
-        <Grid item xs={4}>
+        <Grid item xs={12} md={4}>
           <UserNameForm setProfile={setProfile} />
         </Grid>
         {isLoaded && (
-          <Grid item xs={4}>
+          <Grid item xs={12} md={4}>
             <ProfileTile profile={profile} />
           </Grid>
         )}
@@ -31,15 +32,16 @@ const Home = () => {
       {isLoaded && (
         <>
           <Grid container justifyContent="center">
-            <Grid item xs={5}>
+            <Grid item xs={12} md={4}>
               <WinLoss profile={profile} />
             </Grid>
-            <Grid item xs={5}>
+            <Grid item xs={12} md={4}>
               <FormatPolar profile={profile} />
             </Grid>
           </Grid>
 
           <HeatMap profile={profile} />
+          <RatingGraph stats={profile.stats}/>
           <FormatPerfomance profile={profile} />
         </>
       )}

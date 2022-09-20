@@ -22,3 +22,17 @@ export function removeCameCase(s) {
   }
   return ans;
 }
+
+
+export function makeStringDate(year, month, day) {
+  let ans = "";
+  ans += year.toString();
+  ans += "-";
+   if (month < 10) ans += "0";
+  ans += month.toString();
+  ans += "-";
+   if (day < 10) ans += "0";
+
+  ans += day.toString();
+  return ans;
+}

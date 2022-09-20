@@ -11,19 +11,7 @@ import {
 } from "@mui/material";
 import "../index.css";
 import "react-calendar-heatmap/dist/styles.css";
-
-function makeStringDate(year, month, day) {
-  let ans = "";
-  ans += year.toString();
-  ans += "-";
-  //  if (month < 10) ans += "0";
-  ans += month.toString();
-  ans += "-";
-  //  if (day < 10) ans += "0";
-
-  ans += day.toString();
-  return ans;
-}
+import {makeStringDate} from "../../utils";
 
 const HeatMap = (props) => {
   const { stats } = props.profile;
