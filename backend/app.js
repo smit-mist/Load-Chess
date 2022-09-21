@@ -1,14 +1,19 @@
-const express = require("express");
+const app = require("express")();
+const http = require("http").Server(app);
+const io = require('socket.io')(http);
+const port = (process.env.PORT || 5000);
 
-const app = express();
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static("frontend/build"));
+const gameLogic = require("./game-logic");
 
-  app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "client", "build", "index.html")); // relative path
-  });
-}
-const puzzleRouter = require("./routes/puzzleRoutes");
-app.use("/api/v1", puzzleRouter);
+io.on("connection", socket=>{
+  console.log(socket.id);
+})
+
+http.listen(port, () => {
+  console.log(`Socket.IO server running at http://localhost:${port}/`);
+});
+
+// const puzzleRouter = require("./routes/puzzleRoutes");
+// app.use("/api/v1", puzzleRouter);
 
 module.exports = app;

@@ -1,10 +1,18 @@
-const app = require("./app");
+const app = require("express")();
+const http = require("http").Server(app);
+const io = require('socket.io')(http, {cors:{origin:"*"}});
+const port = (process.env.PORT || 5000);
 
-const PORT = process.env.PORT || 5000;
+const gameLogic = require("./game-logic");
 
-const server = app.listen(PORT, () => {
-  console.log(`Server is listening on prot:- 5000`);
+io.on("connection", socket=>{
+  console.log(socket.id);
+})
+
+http.listen(port, () => {
+  console.log(`Socket.IO server running at http://localhost:${port}/`);
 });
 
-// Step 3
+// const puzzleRouter = require("./routes/puzzleRoutes");
+// app.use("/api/v1", puzzleRouter);
 

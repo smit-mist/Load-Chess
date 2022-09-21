@@ -19,7 +19,7 @@ export default function TournamentCard(props) {
       underline="none"
       
     >
-      <Card sx={{ height: 350 }} key={tour.tour.id}>
+      <Card sx={{height: 350, backgroundColor:'#222222' }} key={tour.tour.id}>
         <CardActionArea>
           <CardMedia
             component="img"
@@ -45,11 +45,7 @@ export default function TournamentCard(props) {
             })}
           </CardContent>
         </CardActionArea>
-        <CardActions>
-          <Button size="small" color="primary">
-            Open
-          </Button>
-        </CardActions>
+     
       </Card>
     </Link>
   );

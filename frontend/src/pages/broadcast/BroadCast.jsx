@@ -5,6 +5,7 @@ import ndjsonStream from "can-ndjson-stream";
 import Grid from "@mui/material/Unstable_Grid2";
 import Box from "@mui/material/Box";
 import TournamentCard from "../../components/ui/TournamentCard";
+import { Skeleton } from "@mui/material";
 
 let isCalled = false;
 
@@ -46,14 +47,27 @@ const BroadCast = () => {
     getAllTours();
   }, []);
 
-  if (loading) return <div>Loading</div>;
+  if (loading)
+    return (
+      <Box sx={{ width: "100%" }}>
+        <Grid container columnSpacing={3} mx={5}>
+          {[1,1,1,1,1,1,1].map((curr) => {
+            return (
+              <Grid xs={4} sx={{ height: 370 }}>
+                <Skeleton height={370} sx={{m:0}}/>
+              </Grid>
+            );
+          })}
+        </Grid>
+      </Box>
+    );
   return (
     <Box sx={{ width: "100%" }}>
       <Grid container rowSpacing={3} columnSpacing={3} my={5} mx={10}>
         {items.map((curr) => {
           return (
-            <Grid xs={4} sx={{ height: 400 }} key={curr.value.tour.name}>
-              <TournamentCard tour={curr.value}/>
+            <Grid xs={4} sx={{ height: 370 }} key={curr.value.tour.name}>
+              <TournamentCard tour={curr.value} />
             </Grid>
           );
         })}

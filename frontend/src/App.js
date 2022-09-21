@@ -11,6 +11,7 @@ import UserBasic from "./pages/auth/UserBasic";
 import Home from "./pages/home/Home";
 import { Paper } from "@mui/material";
 import "./index.css";
+import Play from "./pages/play/Play";
 
 const darkTheme = createTheme({
   palette: {
@@ -49,7 +50,7 @@ function App() {
               <Route path="/" exact={true} element={<Home />} />
               <Route path="/analysis" element={<GamePlay />} />
               <Route path="/tv" element={<ChessTV />} />
-              <Route path="/news" element={<h1>This is News</h1>} />
+              <Route path="/news" element={<Play/>} />
               <Route path="/broadcast" element={<BroadCast />} />
               <Route
                 path="/tournament/:slug/:id"
