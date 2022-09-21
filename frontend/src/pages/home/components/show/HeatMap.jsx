@@ -15,9 +15,9 @@ import {makeStringDate} from "../../utils";
 
 const HeatMap = (props) => {
   const { stats } = props.profile;
-  const [year, setYear] = React.useState(2019);
+  const [year, setYear] = React.useState(2022);
   const [selectedTile, setSelectedTile] = useState({});
-  const yearOption = [2019, 2020, 2021, 2022];
+  const yearOption = [2022, 2021, 2020, 2019];
 
   const handleChange = (event) => {
     setYear(event.target.value);
@@ -66,7 +66,7 @@ const HeatMap = (props) => {
         gutterSize={2}
         startDate={new Date(`${year}-01-01`)}
         showMonthLabels={true}
-        endDate={new Date(`${year}-12-30`)}
+        endDate={new Date(`${year}-12-31`)}
         classForValue={(value) => {
           if (!value) {
             return "color-empty";

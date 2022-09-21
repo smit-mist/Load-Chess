@@ -11,7 +11,8 @@ import {
 } from "chart.js";
 import { Line } from "react-chartjs-2";
 import { getRandomColor, makeStringDate } from "../../utils";
-
+import DropDown from "../../../../components/ui/DropDown";
+import { useState, useEffect } from "react";
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -35,9 +36,8 @@ export const options = {
 };
 const RatingGraph = (props) => {
   const { stats } = props;
-
+  const [isVisible, setIsVisible] = useState("Bullet");
   const plotRating = {};
-  const commonDates = {};
 
   for (let keys in Object.entries(stats)) {
     const currVal = stats[keys];
@@ -50,41 +50,56 @@ const RatingGraph = (props) => {
           dataPoint[2]
         );
         plotRating[currVal.name][eventDate] = dataPoint[3];
-        commonDates[eventDate] = 1;
       });
     }
   }
-  
-  const labels = Object.keys(commonDates);
-  const dataSet = [];
 
   const playingFormat = Object.keys(plotRating);
-  playingFormat.map((name)=>{
+  const dateLabel = {},
+    ratingLabel = {};
+  playingFormat.map((name) => {
     const theData = [];
     let lastKnown = 1500;
-    labels.map((e)=>{
-        if(plotRating[name][e]){
-            lastKnown= plotRating[name][e];
-        }
-        theData.push(lastKnown);
-    })
+    Object.keys(plotRating[name]).map((e) => {
+      if (plotRating[name][e]) {
+        lastKnown = plotRating[name][e];
+      }
+      theData.push(lastKnown);
+    });
     const toReturn = {
       label: name,
       data: theData,
       borderColor: getRandomColor(),
       backgroundColor: "#999999",
     };
-
-    dataSet.push(toReturn);
+    ratingLabel[name] = toReturn;
+    dateLabel[name] = Object.keys(plotRating[name]);
   });
 
-
-    const data = {
-      labels,
-      datasets: dataSet,
-    };
-//   return <></>;
-    return <Line options={options} data={data} />;
+    
+    return (
+    <>
+      <DropDown
+        label="Format"
+        value={isVisible}
+        onChange={(newValue) => {
+          setIsVisible(newValue.target.value);
+        }}
+        option={playingFormat}
+      />
+      {Object.keys(dateLabel[isVisible]).length < 1 ? (
+        <h1>Please play games of this format</h1>
+      ) : (
+        <Line
+          options={options}
+          data={{
+            labels: dateLabel[isVisible],
+            datasets: [ratingLabel[isVisible]],
+          }}
+        />
+      )}
+    </>
+  );
 };
 
 export default RatingGraph;
