@@ -13,6 +13,7 @@ import { Paper } from "@mui/material";
 import "./index.css";
 import Play from "./pages/play/Play";
 import CreateGame from "./pages/play/CreateGame";
+import JoinGame from "./pages/play/JoinGame.jsx";
 
 const darkTheme = createTheme({
   palette: {
@@ -52,6 +53,7 @@ function App() {
               <Route path="/analysis" element={<GamePlay />} />
               <Route path="/tv" element={<ChessTV />} />
               <Route path="/play" element={<CreateGame/>} />
+              <Route path="/game/:id" element={<JoinGame/>}/>
               <Route path="/broadcast" element={<BroadCast />} />
               <Route
                 path="/tournament/:slug/:id"

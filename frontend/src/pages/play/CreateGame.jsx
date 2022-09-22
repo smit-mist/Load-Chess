@@ -5,16 +5,16 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { v4 as uuidv4 } from "uuid";
 import { CopyToClipboard } from "react-copy-to-clipboard";
-import Box from '@mui/material/Box';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import Typography from '@mui/material/Typography';
-
+import Box from "@mui/material/Box";
+import Card from "@mui/material/Card";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
+import Typography from "@mui/material/Typography";
+const socket = require("../../api/socket").socket;
 
 const ShareGame = (props) => {
-  const gameId = uuidv4();
-  const { userName } = props;
+  const { userName, gameId } = props;
+  console.log("Printing props", props);
   const url = `http://localhost:3000/game/${gameId}`;
 
   return (
@@ -35,7 +35,7 @@ const ShareGame = (props) => {
         </CardContent>
         <CardActions>
           <CopyToClipboard
-            text={gameId}
+            text={url}
             onCopy={() => {
               toast("Copied", { autoClose: 500 });
             }}
@@ -45,20 +45,6 @@ const ShareGame = (props) => {
           <Button variant="contained">Start</Button>
         </CardActions>
       </Card>
-      {/* <Grid container justifyContent="center">
-          <Grid item xs={12}>{`Hey, ${userName} share this url with your friend`}</Grid>
-          <Grid item xs={12}>{url}</Grid>
-          <Grid item>
-            <CopyToClipboard
-              text={gameId}
-              onCopy={() => {
-                toast("Copied", { autoClose: 500 });
-              }}
-            >
-              <Button variant="contained">Copy</Button>
-            </CopyToClipboard>
-          </Grid>
-        </Grid> */}
     </Fragment>
   );
 };
@@ -66,18 +52,23 @@ const ShareGame = (props) => {
 const CreateGame = () => {
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [userName, setUserName] = useState("");
-
+  const [gameId, setGameId] = useState("");
   const onSubmit = (e) => {
     e.preventDefault();
     if (userName.length === 0) {
       toast.error("Please enter name", { autoClose: 500 });
       return;
     }
-    console.log("USer name is", userName);
+    let temp = uuidv4();
+    setGameId(temp);
+    // TODO: Create new game here.
+
+    socket.emit("createNewGame", temp);
+    console.log("USer name is", userName, gameId);
     setFormSubmitted(true);
   };
   if (formSubmitted) {
-    return <ShareGame userName={userName} />;
+    return <ShareGame userName={userName} gameId={gameId} />;
   }
   return (
     <Fragment>
