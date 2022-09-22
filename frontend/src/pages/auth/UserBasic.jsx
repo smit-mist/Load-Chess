@@ -7,8 +7,8 @@ const UserBasic = () => {
   return (
     <>
       <ResponsiveAppBar
-        pages={["Home", "Analysis", "TV", "News", "Broadcast"]}
-        link={["/", "/analysis", "/tv", "/news", "/broadcast"]}
+        pages={["Home", "Analysis", "TV", "Play", "Broadcast"]}
+        link={["/", "/analysis", "/tv", "/play", "/broadcast"]}
         // color="primary"
       />
       <Outlet />

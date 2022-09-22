@@ -101,5 +101,5 @@ const RatingGraph = (props) => {
     </>
   );
 };
-
 export default RatingGraph;
+

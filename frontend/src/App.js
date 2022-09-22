@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import ChessTV from "./pages/ChessTV";
+import ChessTV from "./pages/broadcast/ChessTV";
 import BroadCast from "./pages/broadcast/BroadCast";
 import DisplayTournament from "./pages/broadcast/DisplayTournament";
 import Test from "./helper/Test";
@@ -12,6 +12,7 @@ import Home from "./pages/home/Home";
 import { Paper } from "@mui/material";
 import "./index.css";
 import Play from "./pages/play/Play";
+import CreateGame from "./pages/play/CreateGame";
 
 const darkTheme = createTheme({
   palette: {
@@ -42,7 +43,7 @@ const darkTheme = createTheme({
 function App() {
   return (
     <ThemeProvider theme={darkTheme}>
-      <Paper sx={{ m: 0 }}>
+      <Paper sx={{ m: 0, minHeigth:'100%' }}>
         <Router>
           <Routes>
             <Route path="/signin" element={<SignIn />} />
@@ -50,7 +51,7 @@ function App() {
               <Route path="/" exact={true} element={<Home />} />
               <Route path="/analysis" element={<GamePlay />} />
               <Route path="/tv" element={<ChessTV />} />
-              <Route path="/news" element={<Play/>} />
+              <Route path="/play" element={<CreateGame/>} />
               <Route path="/broadcast" element={<BroadCast />} />
               <Route
                 path="/tournament/:slug/:id"
