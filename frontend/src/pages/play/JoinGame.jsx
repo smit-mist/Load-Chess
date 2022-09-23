@@ -11,6 +11,7 @@ const JoinGame = () => {
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [userName, setUserName] = useState("");
 
+  
   const onSubmit = (e) => {
     e.preventDefault();
     if (userName.length === 0) {
